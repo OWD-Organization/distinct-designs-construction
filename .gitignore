@@ -1,0 +1,23 @@
+# Agent / editor tooling (not part of the deliverable)
+.agents/
+.claude/
+skills-lock.json
+
+# Vercel
+.vercel/
+
+# Dependencies
+node_modules/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Logs & env
+*.log
+.env
+.env.local
+.env.*.local

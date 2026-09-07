@@ -1,0 +1,293 @@
+/* =================================================================
+   DISTINCT DESIGNS CONSTRUCTION — LANDING PAGE HUB
+   Shares the design tokens used by the individual landing pages
+   (see custom-home-build/styles.css). Pure CSS, no framework.
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   1. DESIGN TOKENS  (kept in sync with the landing page system)
+   ----------------------------------------------------------------- */
+:root {
+  --color-bg: #faf8f4;
+  --color-bg-sand: #eee6d8;
+  --color-charcoal: #211d19;
+  --color-charcoal-soft: #2c2723;
+  --color-text: #2a2622;
+  --color-text-muted: #686155;
+  --color-text-on-dark: #f2ede3;
+  --color-text-on-dark-muted: #b9b0a1;
+  --color-clay: #9c5b3c;
+  --color-clay-dark: #7d4830;
+  --color-hairline: #ddd2bf;
+  --color-hairline-on-dark: rgba(242, 237, 227, 0.16);
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --fs-h1: clamp(2.35rem, 4.4vw + 0.75rem, 4rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9rem;
+  --fs-eyebrow: 0.8rem;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1.25rem;
+  --space-md: 2rem;
+  --space-lg: 3.25rem;
+  --space-xl: 5rem;
+  --space-2xl: 7.5rem;
+
+  --content-max: 1360px;
+  --radius: 2px;
+  --border-w: 1px;
+
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.3s;
+  --dur-med: 0.6s;
+}
+
+/* -----------------------------------------------------------------
+   2. RESET / BASE
+   ----------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; height: auto; }
+ul { list-style: none; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+h1 { margin: 0; }
+p { margin: 0; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-charcoal);
+  color: var(--color-text-on-dark);
+  padding: var(--space-2xs) var(--space-sm);
+  z-index: 999;
+}
+.skip-link:focus { left: var(--space-sm); top: var(--space-sm); }
+
+:focus-visible { outline: 2px solid var(--color-clay); outline-offset: 3px; }
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-clay);
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------
+   3. HEADER
+   ----------------------------------------------------------------- */
+.hub-header {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+  border-bottom: var(--border-w) solid var(--color-hairline);
+}
+
+.hub-header__brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-top: var(--space-sm);
+}
+.hub-header__brand span { font-weight: 400; color: var(--color-text-muted); }
+
+.hub-header h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+  margin-top: var(--space-md);
+}
+
+.hub-header__note {
+  color: var(--color-text-muted);
+  max-width: 58ch;
+  margin-top: var(--space-sm);
+}
+
+/* -----------------------------------------------------------------
+   4. CARD GRID
+   ----------------------------------------------------------------- */
+.hub-main {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md) var(--space-2xl);
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.hub-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: var(--border-w) solid var(--color-hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg);
+  transition: transform var(--dur-med) var(--ease-editorial),
+              box-shadow var(--dur-med) var(--ease-editorial),
+              border-color var(--dur-med) var(--ease-editorial);
+}
+
+/* Only the published card is interactive */
+a.hub-card__link:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-clay);
+  box-shadow: 0 18px 40px rgba(33, 29, 25, 0.1);
+}
+a.hub-card__link:active { transform: translateY(-1px); }
+
+.hub-card__media {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+}
+.hub-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Unifying warm grade across mixed-source placeholder photography */
+  filter: sepia(0.16) saturate(1.12) brightness(0.97) contrast(1.04) hue-rotate(-4deg);
+  transition: transform var(--dur-med) var(--ease-editorial);
+}
+a.hub-card__link:hover .hub-card__media img { transform: scale(1.04); }
+
+.hub-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  padding: var(--space-md);
+  flex: 1;
+}
+
+.hub-card__status {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  border: var(--border-w) solid var(--color-hairline);
+  border-radius: 999px;
+  padding: 0.15rem var(--space-2xs);
+  margin-bottom: var(--space-2xs);
+}
+.hub-card__status--live {
+  color: var(--color-text-on-dark);
+  background: var(--color-clay);
+  border-color: var(--color-clay);
+}
+
+.hub-card__title {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-charcoal);
+}
+
+.hub-card__range {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-clay);
+}
+
+.hub-card__desc {
+  color: var(--color-text-muted);
+  margin-top: var(--space-3xs);
+}
+
+.hub-card__cta {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+}
+a.hub-card__link .hub-card__cta::after {
+  content: " \2192";
+  transition: opacity var(--dur-fast) var(--ease-editorial);
+}
+
+/* Pending pages: visibly inert, not clickable, still readable */
+.hub-card--pending .hub-card__link {
+  background: var(--color-bg-sand);
+  cursor: not-allowed;
+}
+.hub-card--pending .hub-card__media img { opacity: 0.55; filter: grayscale(0.65) sepia(0.1); }
+.hub-card--pending .hub-card__title { color: var(--color-text-muted); }
+.hub-card--pending .hub-card__range { color: var(--color-text-muted); }
+.hub-card--pending .hub-card__cta { color: var(--color-text-muted); }
+
+/* -----------------------------------------------------------------
+   5. FOOTER
+   ----------------------------------------------------------------- */
+.hub-footer {
+  background: var(--color-charcoal-soft);
+  color: var(--color-text-on-dark-muted);
+  padding: var(--space-xl) var(--space-md) var(--space-md);
+}
+.hub-footer > * {
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+  font-size: var(--fs-small);
+}
+.hub-footer__brand {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-text-on-dark);
+  margin-bottom: var(--space-2xs);
+}
+.hub-footer__legal {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: var(--border-w) solid var(--color-hairline-on-dark);
+  font-size: 0.8rem;
+}
+
+/* -----------------------------------------------------------------
+   6. MEDIA QUERIES
+   ----------------------------------------------------------------- */
+@media (min-width: 700px) {
+  .hub-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1040px) {
+  .hub-grid { grid-template-columns: repeat(3, 1fr); }
+  .hub-header { padding-top: var(--space-2xl); }
+}
