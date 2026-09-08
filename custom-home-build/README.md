@@ -69,6 +69,7 @@ Most images are **temporary stock placeholders**, marked two ways:
 |---|---|
 | `logo-distinct-designs.webp` | Brand logo in the nav. 350×128 source with transparency, shown at 46px tall. The lockup uses dark navy text, so it only works on a light bar — it needs a light variant before going on any dark background. |
 | `process-crew.webp` | Real crew photography in a completed build. Carries **no** `.grade` class and **no** `data-placeholder`, so its true colour survives. The warm unifying grade skews skin tones, so never apply it to real photos of people. |
+| `project-la-mirada.webp` | Real interior of the finished La Mirada remodel. Native 3:4 (900×1200), which matches the tall bento tile on mobile exactly; at desktop the tile is 0.65 so `cover` trims the sides. Also no `.grade`, no `data-placeholder`. |
 
 Do the same for each real photo as it arrives: drop `.grade` and
 `data-placeholder` rather than leaving the unifying filter on top of it.
@@ -84,7 +85,7 @@ grep -n 'data-placeholder' index.html
 | `hero-loggia.webp` (+ `-1200`) | Hero background | 1672×941 / 1200×675 | Signature exterior or loggia, wide 16:9 |
 | `process-crew.webp` | Process split | 1200×900 | **Already real** — crew in a finished build |
 | `process-break.webp` | Full-width break | 1600×750 | In-progress job site |
-| `project-la-mirada.webp` | Bento, tall | 900×1100 | La Mirada Remodel |
+| `project-la-mirada.webp` | Bento, tall | 900×1200 | **Already real** — La Mirada Remodel |
 | `project-hilltop.webp` | Bento | 900×700 | Hilltop Build |
 | `project-cubero.webp` | Bento | 900×700 | Cubero Build |
 | `project-alturas.webp` | Bento, wide | 900×1100 | Alturas Build |
