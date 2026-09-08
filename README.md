@@ -26,7 +26,7 @@ landing page. The two unbuilt pages render as visibly inert cards until they shi
 
 ```
 .
-├── index.html                          # Hub page
+├── index.html                          # Hub page (no footer, no JS)
 ├── styles.css                          # Hub styles (shares the design tokens)
 ├── assets/                             # Hub card images
 ├── custom-home-build/                  # Landing page 1 — self-contained

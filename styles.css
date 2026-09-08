@@ -254,34 +254,7 @@ a.hub-card__link .hub-card__cta::after {
 .hub-card--pending .hub-card__cta { color: var(--color-text-muted); }
 
 /* -----------------------------------------------------------------
-   5. FOOTER
-   ----------------------------------------------------------------- */
-.hub-footer {
-  background: var(--color-charcoal-soft);
-  color: var(--color-text-on-dark-muted);
-  padding: var(--space-xl) var(--space-md) var(--space-md);
-}
-.hub-footer > * {
-  max-width: var(--content-max);
-  margin-left: auto;
-  margin-right: auto;
-  font-size: var(--fs-small);
-}
-.hub-footer__brand {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: var(--color-text-on-dark);
-  margin-bottom: var(--space-2xs);
-}
-.hub-footer__legal {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: var(--border-w) solid var(--color-hairline-on-dark);
-  font-size: 0.8rem;
-}
-
-/* -----------------------------------------------------------------
-   6. MEDIA QUERIES
+   5. MEDIA QUERIES
    ----------------------------------------------------------------- */
 @media (min-width: 700px) {
   .hub-grid { grid-template-columns: repeat(2, 1fr); }
