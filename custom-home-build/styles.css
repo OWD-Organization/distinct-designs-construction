@@ -552,8 +552,17 @@ h4 {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* Scrim guarantees WCAG-safe contrast for the label over any photo */
-  background: linear-gradient(0deg, rgba(7, 6, 20, 0.88) 0%, rgba(7, 6, 20, 0.45) 28%, rgba(7, 6, 20, 0) 58%);
+  /* Scrim guarantees WCAG-safe contrast for the label over any photo.
+     Stops are in PIXELS, not percentages: the label is a fixed size, so the
+     protection band must be too. With percentages a short tile (the wide
+     Alturas cell is only 310px) got far less absolute darkening than a tall
+     one, and the label failed AA over bright photography. The label occupies
+     the bottom ~80px, which this keeps at >=0.78 alpha on every tile. */
+  background: linear-gradient(0deg,
+    rgba(7, 6, 20, 0.92) 0px,
+    rgba(7, 6, 20, 0.86) 70px,
+    rgba(7, 6, 20, 0.35) 130px,
+    rgba(7, 6, 20, 0) 200px);
 }
 .project-tile__label {
   position: absolute;

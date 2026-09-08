@@ -196,8 +196,11 @@
         <img src="images/project-cubero.webp" alt="Cubero Build &mdash; desert modern home from above, with pool and Joshua tree landscape" loading="lazy" width="900" height="675">
         <span class="project-tile__label">Cubero Build</span>
       </a>
-      <div class="project-tile project-tile--tall project-tile--progress">
-        <img class="grade" src="images/project-alturas.webp" alt="Alturas Build &mdash; luxury custom home currently in progress" data-placeholder="true" loading="lazy" width="900" height="1100">
+      <!-- No --tall here: this cell is placed wide at desktop, and the photo is
+           landscape, so the default 4:3 is the right shape on mobile too. -->
+      <div class="project-tile project-tile--progress">
+        <!-- Real photography: no .grade filter and no data-placeholder. -->
+        <img src="images/project-alturas.webp" alt="Alturas Build in progress &mdash; sheathed walls with a circular window opening, against the desert and mountains" loading="lazy" width="1600" height="1066">
         <span class="project-tile__label">Alturas Build <em>&mdash; Currently In Progress</em></span>
       </div>
     </div>
