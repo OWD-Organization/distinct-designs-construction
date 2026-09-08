@@ -431,6 +431,10 @@ h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Anchor the crop to the bottom: the house, terrace and desert ridgeline all
+     sit in the lower half of the frame, while the top is empty sky. Cropping
+     from the top keeps the subject and the sunset band in view. */
+  object-position: center bottom;
 }
 .hero__scrim {
   position: absolute;
