@@ -74,10 +74,12 @@ Most images are **temporary stock placeholders**, marked two ways:
 | `project-cubero.webp` | Real aerial of the Cubero build. Source was 3:2, centre-cropped to 4:3 before resizing — the house and pool sit centre-frame, so nothing important is lost. |
 | `project-alturas.webp` | Real in-progress shot. Built from the 2400px Cloudinary original. Sized 1400×932 (1.6× the 857px display width) rather than larger: the fine sheathing texture encodes expensively, so more pixels cost far more bytes than they return. Its tile no longer carries `--tall`: the cell is placed wide at desktop and the photo is landscape, so the default 4:3 is correct on mobile too. |
 
-**The projects grid is now entirely real photography** — no `.grade`, no
-placeholders. `.grade` survives only on the hero, the full-width break and the
-lead section, which are still stock. Once those are replaced, the filter and its
-class can be removed altogether.
+| `footer-cta.webp` | Real interior for the lead section. Native 3:2. Note this slot's box **flips ratio** between breakpoints — roughly 0.60 (a tall column beside the form) at desktop, but 1.34 (a wide band above it) on mobile — so `cover` crops the sides at desktop and shows almost the full frame on mobile. A landscape source suits it because the mobile band is the wider of the two. |
+
+**The projects grid and the lead section are now real photography** — no
+`.grade`, no placeholders. `.grade` survives only on the hero and the
+full-width break. Once those two are replaced, the filter and its class can be
+removed altogether.
 
 > **The project-tile scrim uses PIXEL stops, not percentages** (§11). The label
 > is a fixed size, so its protection band must be too. With percentages the
@@ -111,7 +113,7 @@ grep -n 'data-placeholder' index.html
 | `project-hilltop.webp` | Bento | 900×675 | **Already real** — Hilltop Build |
 | `project-cubero.webp` | Bento | 900×675 | **Already real** — Cubero Build |
 | `project-alturas.webp` | Bento, wide | 1400×932 | **Already real** — Alturas Build, in progress |
-| `footer-cta.webp` | Lead section | 1600×1000 | Hero-quality exterior |
+| `footer-cta.webp` | Lead section | 1600×1066 | **Already real** — finished great room |
 
 Current placeholders are royalty-free Unsplash photography (Unsplash License —
 free for commercial use, no attribution required), re-encoded to WebP. The hero
