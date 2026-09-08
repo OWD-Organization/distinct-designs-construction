@@ -88,6 +88,13 @@ stock sources.
 > short wide Alturas cell (310px tall) got far less absolute darkening than the
 > 640px tall cell, and its label measured 3.84:1 over bright sheathing. Keep the
 > stops in px, and re-measure if the label's size or position changes.
+>
+> The scrim was later lightened on request so more of each photograph shows
+> through. Current worst-case label contrast: La Mirada 13.07, Hilltop 12.42,
+> Cubero 10.86, Alturas 7.40 with its italic sub-line at 5.24. **The italic
+> sub-line is the binding constraint** — it is the smallest text over the
+> brightest photo. Lighten further only with a re-measurement; it has about
+> 16% of headroom left before it drops under AA.
 
 The wide bento tiles are **4:3 (900×675)**, matching the tile ratio on mobile
 exactly. The older stock assets were 900×700, which was slightly off.
@@ -138,6 +145,26 @@ The `.grade` class applies a warm, slightly desaturated CSS filter so mixed-sour
 placeholders read as one set. **Once real, consistently-graded project photography
 is in, remove `.grade` from the `<img>` tags** (or empty the rule in `styles.css`
 §6) so the real color grading shows through untouched.
+
+---
+
+## Project lightbox
+
+Each project tile opens its photograph in a native `<dialog>` (`#lightbox`).
+
+The tiles are `<button>` elements, not links — they trigger in-page UI rather
+than navigating. They previously pointed at `/la-mirada`, `/hilltop` and
+`/cubero`, none of which exist on this site, so all three were 404s.
+
+`showModal()` supplies focus trapping, Esc-to-close and an inert background from
+the platform, so none of that is hand-rolled. `script.js` adds only: setting the
+image and caption, the close button, outside-click-to-close, and clearing `src`
+on close so a large photo is not held in memory. If `<dialog>` is unsupported the
+tiles are disabled rather than left half-working.
+
+Because the tiles are buttons, `.project-tile` clears the UA button styling
+(padding, border, background, font, text-align) before the tile look applies.
+Removing that reset will visibly break the grid.
 
 ---
 

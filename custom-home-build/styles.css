@@ -537,6 +537,16 @@ h4 {
   overflow: hidden;
   border-radius: var(--radius);
   aspect-ratio: 4 / 3;
+  /* Tiles are <button> elements (they open a lightbox), so the UA button
+     styling has to be cleared before the tile look applies. */
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+  cursor: zoom-in;
 }
 .project-tile--tall { aspect-ratio: 3 / 4; }
 .project-tile img {
@@ -559,9 +569,9 @@ h4 {
      one, and the label failed AA over bright photography. The label occupies
      the bottom ~80px, which this keeps at >=0.78 alpha on every tile. */
   background: linear-gradient(0deg,
-    rgba(7, 6, 20, 0.92) 0px,
-    rgba(7, 6, 20, 0.86) 70px,
-    rgba(7, 6, 20, 0.35) 130px,
+    rgba(7, 6, 20, 0.82) 0px,
+    rgba(7, 6, 20, 0.74) 70px,
+    rgba(7, 6, 20, 0.26) 130px,
     rgba(7, 6, 20, 0) 200px);
 }
 .project-tile__label {
@@ -576,7 +586,76 @@ h4 {
   letter-spacing: 0.01em;
 }
 .project-tile__label em { font-style: italic; color: var(--color-text-on-dark-muted); font-size: 0.9rem; display: block; }
-.project-tile--progress { cursor: default; }
+/* --progress is still clickable (it opens the lightbox), so it keeps the
+   zoom cursor inherited from .project-tile. */
+
+/* -----------------------------------------------------------------
+   11.b PROJECT LIGHTBOX
+   Native <dialog> + showModal(): focus trapping, Esc-to-close and inert
+   background come from the platform rather than hand-rolled JS.
+   ----------------------------------------------------------------- */
+.lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: min(92vw, 1400px);
+  max-height: 92vh;
+  overflow: visible;
+  color: var(--color-text-on-dark);
+}
+.lightbox::backdrop {
+  background: rgba(7, 6, 20, 0.9);
+}
+
+.lightbox__figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.lightbox__img {
+  max-width: 100%;
+  /* Leave room for the caption beneath so tall photos still fit the viewport */
+  max-height: 82vh;
+  width: auto;
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+.lightbox__caption {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--color-text-on-dark);
+}
+.lightbox__caption em {
+  font-style: italic;
+  color: var(--color-text-on-dark-muted);
+  font-size: 0.9rem;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: calc(-1 * var(--space-md));
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius);
+  transition: color var(--dur-fast) var(--ease-editorial);
+}
+.lightbox__close:hover { color: var(--color-clay); }
+
+@media (max-width: 640px) {
+  .lightbox { max-width: 94vw; }
+  .lightbox__close { top: calc(-1 * var(--space-lg)); right: 50%; transform: translateX(50%); }
+}
 
 /* -----------------------------------------------------------------
    12. WHY US GRID
