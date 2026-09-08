@@ -1,7 +1,7 @@
 /* =================================================================
    DISTINCT DESIGNS CONSTRUCTION — LANDING PAGE HUB
    Shares the design tokens used by the individual landing pages
-   (see custom-home-build-stock/styles.css). Pure CSS, no framework.
+   (see custom-home-build/styles.css). Pure CSS, no framework.
    ================================================================= */
 
 /* -----------------------------------------------------------------
@@ -18,7 +18,6 @@
   --color-text-on-dark-muted: #b9b0a1;
   --color-clay: #9c5b3c;
   --color-clay-dark: #7d4830;
-  --color-on-accent: #f2ede3; /* text on an accent surface (4.5:1 on --color-clay) */
   --color-hairline: #ddd2bf;
   --color-hairline-on-dark: rgba(242, 237, 227, 0.16);
 
@@ -74,7 +73,7 @@ body {
 img { max-width: 100%; display: block; height: auto; }
 ul { list-style: none; margin: 0; padding: 0; }
 a { color: inherit; text-decoration: none; }
-h1, h2 { margin: 0; }
+h1 { margin: 0; }
 p { margin: 0; }
 
 .skip-link {
@@ -148,9 +147,7 @@ p { margin: 0; }
   gap: var(--space-lg);
 }
 
-/* The card is a container, not a link: each landing page carries two
-   independently-linkable versions (stock photography / real photography). */
-.hub-card {
+.hub-card__link {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -158,7 +155,18 @@ p { margin: 0; }
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--color-bg);
+  transition: transform var(--dur-med) var(--ease-editorial),
+              box-shadow var(--dur-med) var(--ease-editorial),
+              border-color var(--dur-med) var(--ease-editorial);
 }
+
+/* Only the published card is interactive */
+a.hub-card__link:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-clay);
+  box-shadow: 0 18px 40px rgba(33, 29, 25, 0.1);
+}
+a.hub-card__link:active { transform: translateY(-1px); }
 
 .hub-card__media {
   display: block;
@@ -171,7 +179,9 @@ p { margin: 0; }
   object-fit: cover;
   /* Unifying warm grade across mixed-source placeholder photography */
   filter: sepia(0.16) saturate(1.12) brightness(0.97) contrast(1.04) hue-rotate(-4deg);
+  transition: transform var(--dur-med) var(--ease-editorial);
 }
+a.hub-card__link:hover .hub-card__media img { transform: scale(1.04); }
 
 .hub-card__body {
   display: flex;
@@ -180,6 +190,24 @@ p { margin: 0; }
   gap: var(--space-2xs);
   padding: var(--space-md);
   flex: 1;
+}
+
+.hub-card__status {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  border: var(--border-w) solid var(--color-hairline);
+  border-radius: 999px;
+  padding: 0.15rem var(--space-2xs);
+  margin-bottom: var(--space-2xs);
+}
+.hub-card__status--live {
+  color: var(--color-text-on-dark);
+  background: var(--color-clay);
+  border-color: var(--color-clay);
 }
 
 .hub-card__title {
@@ -201,75 +229,29 @@ p { margin: 0; }
   margin-top: var(--space-3xs);
 }
 
-/* ---- Version rows: stock photography / real photography ---- */
-.hub-versions {
+.hub-card__cta {
   margin-top: auto;
   padding-top: var(--space-sm);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3xs);
-}
-
-.hub-version {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-sm);
-  width: 100%;
-  padding: var(--space-2xs) var(--space-xs);
-  border: var(--border-w) solid var(--color-hairline);
-  border-radius: var(--radius);
-  transition: background var(--dur-fast) var(--ease-editorial),
-              border-color var(--dur-fast) var(--ease-editorial),
-              transform var(--dur-fast) var(--ease-editorial);
-}
-
-.hub-version__name {
   font-size: var(--fs-small);
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--color-charcoal);
 }
-
-.hub-version__state {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
-.hub-version__state--live {
-  color: var(--color-on-accent);
-  background: var(--color-clay);
-  border-radius: 999px;
-  padding: 0.1rem var(--space-2xs);
-}
-
-/* Published version: interactive */
-a.hub-version:hover {
-  background: var(--color-bg-sand);
-  border-color: var(--color-clay);
-  transform: translateY(-2px);
-}
-a.hub-version:active { transform: translateY(0); }
-a.hub-version .hub-version__name::after {
+a.hub-card__link .hub-card__cta::after {
   content: " \2192";
+  transition: opacity var(--dur-fast) var(--ease-editorial);
 }
 
-/* Pending version: visibly inert, not clickable, still readable */
-.hub-version--pending {
-  cursor: not-allowed;
+/* Pending pages: visibly inert, not clickable, still readable */
+.hub-card--pending .hub-card__link {
   background: var(--color-bg-sand);
-  border-style: dashed;
+  cursor: not-allowed;
 }
-.hub-version--pending .hub-version__name { color: var(--color-text-muted); }
-
-/* A card with no published version at all reads as dormant */
 .hub-card--pending .hub-card__media img { opacity: 0.55; filter: grayscale(0.65) sepia(0.1); }
 .hub-card--pending .hub-card__title { color: var(--color-text-muted); }
 .hub-card--pending .hub-card__range { color: var(--color-text-muted); }
+.hub-card--pending .hub-card__cta { color: var(--color-text-muted); }
 
 /* -----------------------------------------------------------------
    5. FOOTER

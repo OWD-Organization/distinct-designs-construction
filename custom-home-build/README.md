@@ -1,12 +1,10 @@
-# Distinct Designs Construction — Custom Home Build (stock photos)
+# Distinct Designs Construction — Custom Home Build Landing Page
 
-Production-ready landing page for `/custom-home-build-stock/`. This is the
-**stock-photography** version; the real-photography twin lives at
-`/custom-home-build-real/`. Pure HTML/CSS/vanilla JS.
+Production-ready landing page for `/custom-home-build`. Pure HTML/CSS/vanilla JS.
 **No frameworks, no build step, no dependencies.** Open `index.html` or serve the folder.
 
 ```
-custom-home-build-stock/
+custom-home-build/
 ├── index.html      # Page markup + FAQ JSON-LD
 ├── styles.css      # Design system + page styles (18 numbered sections)
 ├── script.js       # Nav, scroll reveal, accordion, form
