@@ -58,10 +58,20 @@ spacing scale, layout widths, easing). Rebrand or retune by editing those values
 
 ## Swapping Photography
 
-Every image is a **temporary stock placeholder** and is marked two ways:
+Most images are **temporary stock placeholders**, marked two ways:
 
 - `data-placeholder="true"` on the `<img>`
 - An HTML comment above it describing what belongs there
+
+**Two assets are already real and must not be treated as placeholders:**
+
+| Asset | Notes |
+|---|---|
+| `logo-distinct-designs.webp` | Brand logo in the nav. 350×128 source with transparency, shown at 46px tall. The lockup uses dark navy text, so it only works on a light bar — it needs a light variant before going on any dark background. |
+| `process-crew.webp` | Real crew photography in a completed build. Carries **no** `.grade` class and **no** `data-placeholder`, so its true colour survives. The warm unifying grade skews skin tones, so never apply it to real photos of people. |
+
+Do the same for each real photo as it arrives: drop `.grade` and
+`data-placeholder` rather than leaving the unifying filter on top of it.
 
 Find them all with:
 
@@ -72,7 +82,7 @@ grep -n 'data-placeholder' index.html
 | File | Slot | Target size | Replace with |
 |---|---|---|---|
 | `hero-loggia.webp` (+ `-1200`) | Hero background | 1672×941 / 1200×675 | Signature exterior or loggia, wide 16:9 |
-| `process-blueprint.webp` | Process split | 1200×900 | Real renderings / permit set |
+| `process-crew.webp` | Process split | 1200×900 | **Already real** — crew in a finished build |
 | `process-break.webp` | Full-width break | 1600×750 | In-progress job site |
 | `project-la-mirada.webp` | Bento, tall | 900×1100 | La Mirada Remodel |
 | `project-hilltop.webp` | Bento | 900×700 | Hilltop Build |
@@ -84,8 +94,9 @@ Current placeholders are royalty-free Unsplash photography (Unsplash License —
 free for commercial use, no attribution required), re-encoded to WebP. The hero
 is a client-supplied generated image, also re-encoded to WebP.
 
-`hero-desert-home.webp` (+ `-1200`) is the previous hero, now unreferenced —
-kept only so the earlier treatment is easy to restore. Safe to delete.
+`hero-desert-home.webp` (+ `-1200`, 504 KB) and `process-blueprint.webp` (104 KB)
+are superseded and now unreferenced, kept only so the earlier treatments are easy
+to restore. Safe to delete.
 
 **The hero scrim is tuned to the hero image.** `.hero__scrim` (styles.css §9)
 carries two stacked gradients sized for a *bright* photograph. If you swap in a
@@ -127,8 +138,11 @@ Please preserve these when editing — each is deliberate:
   If JS fails, the page still renders fully. Never move `opacity: 0` onto bare `.reveal`.
 - **Reduced motion** is honored globally and in `script.js` (`prefers-reduced-motion`).
 - **Hero sizing** is `calc(100dvh - var(--nav-h))`, not `100vh`. The sticky nav
-  occupies layout flow, and `dvh` avoids the iOS Safari address-bar jump. If nav
-  height changes, update `--nav-h` (mobile) and its `@media (min-width: 1024px)` override.
+  occupies layout flow, and `dvh` avoids the iOS Safari address-bar jump.
+  `--nav-h` (71px) must match the nav's real height, which the logo now sets, so
+  it is identical at every breakpoint and needs no media-query override.
+  **If you resize the logo, re-measure the nav and update `--nav-h`**, or the
+  hero will over- or under-shoot one viewport.
 - **Contrast**: the palette is WCAG AA verified. `--color-text-muted` (`#686155`)
   is set to pass on *both* the page background and the sand background.
 - **`[id] { scroll-margin-top }`** keeps anchor-linked headings clear of the sticky nav.
