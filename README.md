@@ -106,5 +106,13 @@ Pushes to `main` deploy to production; pull requests get preview URLs.
   only armed by JS. Never move `opacity: 0` onto a bare `.reveal`.
 - **Contrast is WCAG AA verified.** `--color-text-muted` is tuned to pass on both
   the page background and the sand background.
+- **Scrims over photography are sized by measurement, not by eye.** The hero
+  scrim and the project-tile scrim were both set by sampling the rendered
+  background behind each text block and checking it against WCAG AA. The tile
+  scrim deliberately uses pixel gradient stops rather than percentages, because
+  the label is a fixed size while the tiles are not.
+- **Replacing an image under its existing filename does not bust caches.** When
+  verifying a swap, check the image's intrinsic size against the file on disk
+  rather than trusting a screenshot.
 - **FAQ JSON-LD must stay in sync** with the visible FAQ copy on each page.
 - **Copy is client-supplied and used verbatim.** Do not paraphrase or condense it.

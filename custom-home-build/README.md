@@ -72,6 +72,18 @@ Most images are **temporary stock placeholders**, marked two ways:
 | `project-la-mirada.webp` | Real interior of the finished La Mirada remodel. Native 3:4 (900×1200), which matches the tall bento tile on mobile exactly; at desktop the tile is 0.65 so `cover` trims the sides. Also no `.grade`, no `data-placeholder`. |
 | `project-hilltop.webp` | Real interior of the Hilltop build. Source was already 4:3, so it is a straight resize to 900×675. |
 | `project-cubero.webp` | Real aerial of the Cubero build. Source was 3:2, centre-cropped to 4:3 before resizing — the house and pool sit centre-frame, so nothing important is lost. |
+| `project-alturas.webp` | Real in-progress shot. Built from the 2400px Cloudinary original, not the 800px derivative the link served, because this cell displays 857px wide. Its tile no longer carries `--tall`: the cell is placed wide at desktop and the photo is landscape, so the default 4:3 is correct on mobile too. |
+
+**The projects grid is now entirely real photography** — no `.grade`, no
+placeholders. `.grade` survives only on the hero, the full-width break and the
+lead section, which are still stock. Once those are replaced, the filter and its
+class can be removed altogether.
+
+> **The project-tile scrim uses PIXEL stops, not percentages** (§11). The label
+> is a fixed size, so its protection band must be too. With percentages the
+> short wide Alturas cell (310px tall) got far less absolute darkening than the
+> 640px tall cell, and its label measured 3.84:1 over bright sheathing. Keep the
+> stops in px, and re-measure if the label's size or position changes.
 
 The wide bento tiles are **4:3 (900×675)**, matching the tile ratio on mobile
 exactly. The older stock assets were 900×700, which was slightly off.
@@ -98,7 +110,7 @@ grep -n 'data-placeholder' index.html
 | `project-la-mirada.webp` | Bento, tall | 900×1200 | **Already real** — La Mirada Remodel |
 | `project-hilltop.webp` | Bento | 900×675 | **Already real** — Hilltop Build |
 | `project-cubero.webp` | Bento | 900×675 | **Already real** — Cubero Build |
-| `project-alturas.webp` | Bento, wide | 900×1100 | Alturas Build |
+| `project-alturas.webp` | Bento, wide | 1600×1066 | **Already real** — Alturas Build, in progress |
 | `footer-cta.webp` | Lead section | 1600×1000 | Hero-quality exterior |
 
 Current placeholders are royalty-free Unsplash photography (Unsplash License —
