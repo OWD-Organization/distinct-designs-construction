@@ -10,15 +10,26 @@ Deployed as a static site on Vercel.
 
 ## Pages
 
+Every landing page ships in **two versions**: one with temporary stock
+photography, one with the real project photography.
+
 | Page | Route | Status |
 |---|---|---|
 | Hub (index of landing pages) | `/` | Live |
-| Custom Home Build | `/custom-home-build/` | Live |
-| Whole-Home Remodel | `/whole-home-remodel/` | Not built yet |
-| Custom ADU & Guest Suite | `/custom-adu/` | Not built yet |
+| Custom Home Build — stock photos | `/custom-home-build-stock/` | Live |
+| Custom Home Build — real photos | `/custom-home-build-real/` | Awaiting photography |
+| Whole-Home Remodel — stock photos | `/whole-home-remodel-stock/` | Not built yet |
+| Whole-Home Remodel — real photos | `/whole-home-remodel-real/` | Awaiting photography |
+| Custom ADU & Guest Suite — stock photos | `/custom-adu-stock/` | Not built yet |
+| Custom ADU & Guest Suite — real photos | `/custom-adu-real/` | Awaiting photography |
 
-The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
-landing page. The two unbuilt pages render as visibly inert cards until they ship.
+The hub at `/` is an internal index — it is `noindex, nofollow`. It shows one card
+per landing page, each listing its two versions with an independent status; versions
+that do not exist yet render as visibly inert, non-clickable rows.
+
+Both versions of a page share the same `<link rel="canonical">` (the client's real
+URL, e.g. `https://distinctdesignsconstruction.com/custom-home-build`), because they
+are the same page — only the photography differs.
 
 ---
 
@@ -29,7 +40,7 @@ landing page. The two unbuilt pages render as visibly inert cards until they shi
 ├── index.html                          # Hub page
 ├── styles.css                          # Hub styles (shares the design tokens)
 ├── assets/                             # Hub card images
-├── custom-home-build/                  # Landing page 1 — self-contained
+├── custom-home-build-stock/            # Landing page 1, stock photos — self-contained
 │   ├── index.html
 │   ├── styles.css                      # The design system
 │   ├── script.js
@@ -53,23 +64,28 @@ python3 -m http.server 8000
 ```
 
 Opening `index.html` directly via `file://` also works, but the root-relative link
-to `/custom-home-build/` will not resolve. Use a server.
+to `/custom-home-build-stock/` will not resolve. Use a server.
 
 ---
 
 ## Adding the remaining two pages
 
-Full instructions are in [`custom-home-build/README.md`](custom-home-build/README.md).
+Full instructions are in [`custom-home-build-stock/README.md`](custom-home-build-stock/README.md).
 Short version:
 
-1. `cp -r custom-home-build whole-home-remodel`
+1. `cp -r custom-home-build-stock whole-home-remodel-stock`
 2. Swap in the copy from the matching `<article>` in `distinct-designs-landing-pages.html`
 3. Update `<title>`, meta description, canonical URL, and the FAQ JSON-LD
 4. Replace the images in that folder
-5. In the hub's `index.html`, change that card's wrapper from
-   `<div class="hub-card__link" aria-disabled="true">` to
-   `<a class="hub-card__link" href="/whole-home-remodel/">`, and swap its
-   `hub-card__status` to `hub-card__status--live` with the label `Live`
+5. In the hub's `index.html`, change that version's row from
+   `<span class="hub-version hub-version--pending" aria-disabled="true">` to
+   `<a class="hub-version" href="/whole-home-remodel-stock/">`, and swap its
+   `hub-version__state` to `hub-version__state--live` with the label `Live`.
+   Drop `hub-card--pending` from the `<li>` once that card has any live version.
+
+To produce the **real-photo** version of a page, copy its stock folder to the
+`-real` suffix, replace the images, and remove the `data-placeholder="true"`
+attributes and `.grade` class as described in the per-page README.
 
 The stylesheet is a shared design system driven by `:root` tokens — rebrand or
 retune by editing those values, not individual rules.

@@ -439,7 +439,22 @@ h4 {
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(7, 6, 20, 0.82) 0%, rgba(7, 6, 20, 0.35) 55%, rgba(7, 6, 20, 0.15) 100%);
+  /* Two stacked layers. The hero photograph is bright (pale travertine and
+     sky), so white type needs a real base, not a light wash:
+       1. horizontal — anchors the left column where the copy sits
+       2. vertical   — grounds the base and keeps the top airy
+     Falling away to the right leaves the colonnade, pool and palms visible. */
+  background:
+    linear-gradient(90deg,
+      rgba(7, 6, 20, 0.90) 0%,
+      rgba(7, 6, 20, 0.80) 25%,
+      rgba(7, 6, 20, 0.56) 58%,
+      rgba(7, 6, 20, 0.22) 80%,
+      rgba(7, 6, 20, 0.02) 100%),
+    linear-gradient(0deg,
+      rgba(7, 6, 20, 0.58) 0%,
+      rgba(7, 6, 20, 0.22) 55%,
+      rgba(7, 6, 20, 0.34) 100%);
 }
 .hero__content {
   position: relative;

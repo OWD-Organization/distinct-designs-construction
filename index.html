@@ -23,7 +23,8 @@
   <h1>Landing Pages</h1>
   <p class="hub-header__note">
     Campaign landing pages for the High Desert and Coachella Valley.
-    Each page is a standalone build sharing one design system.
+    Each page ships in two versions &mdash; one with temporary stock photography,
+    one with real project photography &mdash; sharing a single design system.
   </p>
 </header>
 
@@ -31,74 +32,106 @@
 
   <ul class="hub-grid">
 
-    <!-- ---------- 1. CUSTOM HOME BUILD (live) ---------- -->
+    <!-- ---------- 1. CUSTOM HOME BUILD ---------- -->
     <li class="hub-card">
-      <a class="hub-card__link" href="/custom-home-build/">
-        <span class="hub-card__media">
-          <img src="assets/hub-custom-home.webp"
-               alt="Modern luxury desert home at sunset"
-               data-placeholder="true"
-               loading="lazy" width="900" height="650">
-        </span>
-        <span class="hub-card__body">
-          <span class="hub-card__status hub-card__status--live">Live</span>
-          <span class="hub-card__title">Custom Home Build</span>
-          <span class="hub-card__range">Ground-up custom homes &middot; $870K to $5M+</span>
-          <span class="hub-card__desc">
-            One dedicated crew from groundbreaking to move-in, a budget locked in
-            before signing, and daily progress for out-of-state owners.
-          </span>
-          <span class="hub-card__cta">View landing page</span>
-        </span>
-      </a>
-    </li>
+      <div class="hub-card__media">
+        <img src="assets/hub-custom-home.webp"
+             alt="Modern luxury desert home at sunset"
+             data-placeholder="true"
+             loading="lazy" width="900" height="650">
+      </div>
+      <div class="hub-card__body">
+        <h2 class="hub-card__title">Custom Home Build</h2>
+        <p class="hub-card__range">Ground-up custom homes &middot; $870K to $5M+</p>
+        <p class="hub-card__desc">
+          One dedicated crew from groundbreaking to move-in, a budget locked in
+          before signing, and daily progress for out-of-state owners.
+        </p>
 
-    <!-- ---------- 2. WHOLE-HOME REMODEL (not built yet) ---------- -->
-    <li class="hub-card hub-card--pending">
-      <div class="hub-card__link" aria-disabled="true">
-        <span class="hub-card__media">
-          <img src="assets/hub-remodel.webp"
-               alt="Contemporary open-plan living space with indoor-outdoor flow"
-               data-placeholder="true"
-               loading="lazy" width="900" height="650">
-        </span>
-        <span class="hub-card__body">
-          <span class="hub-card__status">In development</span>
-          <span class="hub-card__title">Whole-Home Remodel</span>
-          <span class="hub-card__range">Designer kitchens, spa baths &amp; full transformations</span>
-          <span class="hub-card__desc">
-            Priced as one number before demo day, built by one crew, with daily
-            photo updates visible from anywhere.
-          </span>
-          <span class="hub-card__cta">Not published yet</span>
-        </span>
+        <ul class="hub-versions">
+          <li>
+            <a class="hub-version" href="/custom-home-build-stock/">
+              <span class="hub-version__name">Stock photos</span>
+              <span class="hub-version__state hub-version__state--live">Live</span>
+            </a>
+          </li>
+          <li>
+            <span class="hub-version hub-version--pending" aria-disabled="true">
+              <span class="hub-version__name">Real photos</span>
+              <span class="hub-version__state">Awaiting photography</span>
+            </span>
+          </li>
+        </ul>
       </div>
     </li>
 
-    <!-- ---------- 3. CUSTOM ADU (not built yet) ---------- -->
+    <!-- ---------- 2. WHOLE-HOME REMODEL ---------- -->
     <li class="hub-card hub-card--pending">
-      <div class="hub-card__link" aria-disabled="true">
-        <span class="hub-card__media">
-          <img src="assets/hub-adu.webp"
-               alt="Compact modern guest structure with warm wood cladding"
-               data-placeholder="true"
-               loading="lazy" width="900" height="650">
-        </span>
-        <span class="hub-card__body">
-          <span class="hub-card__status">In development</span>
-          <span class="hub-card__title">Custom ADU &amp; Guest Suite</span>
-          <span class="hub-card__range">Built to the same standard as our $870K+ homes</span>
-          <span class="hub-card__desc">
-            Full permitting and utility coordination, one clear price, and a
-            finish level that adds lasting property value.
-          </span>
-          <span class="hub-card__cta">Not published yet</span>
-        </span>
+      <div class="hub-card__media">
+        <img src="assets/hub-remodel.webp"
+             alt="Contemporary open-plan living space with indoor-outdoor flow"
+             data-placeholder="true"
+             loading="lazy" width="900" height="650">
+      </div>
+      <div class="hub-card__body">
+        <h2 class="hub-card__title">Whole-Home Remodel</h2>
+        <p class="hub-card__range">Designer kitchens, spa baths &amp; full transformations</p>
+        <p class="hub-card__desc">
+          Priced as one number before demo day, built by one crew, with daily
+          photo updates visible from anywhere.
+        </p>
+
+        <ul class="hub-versions">
+          <li>
+            <span class="hub-version hub-version--pending" aria-disabled="true">
+              <span class="hub-version__name">Stock photos</span>
+              <span class="hub-version__state">Not built yet</span>
+            </span>
+          </li>
+          <li>
+            <span class="hub-version hub-version--pending" aria-disabled="true">
+              <span class="hub-version__name">Real photos</span>
+              <span class="hub-version__state">Awaiting photography</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- ---------- 3. CUSTOM ADU ---------- -->
+    <li class="hub-card hub-card--pending">
+      <div class="hub-card__media">
+        <img src="assets/hub-adu.webp"
+             alt="Compact modern guest structure with warm wood cladding"
+             data-placeholder="true"
+             loading="lazy" width="900" height="650">
+      </div>
+      <div class="hub-card__body">
+        <h2 class="hub-card__title">Custom ADU &amp; Guest Suite</h2>
+        <p class="hub-card__range">Built to the same standard as our $870K+ homes</p>
+        <p class="hub-card__desc">
+          Full permitting and utility coordination, one clear price, and a
+          finish level that adds lasting property value.
+        </p>
+
+        <ul class="hub-versions">
+          <li>
+            <span class="hub-version hub-version--pending" aria-disabled="true">
+              <span class="hub-version__name">Stock photos</span>
+              <span class="hub-version__state">Not built yet</span>
+            </span>
+          </li>
+          <li>
+            <span class="hub-version hub-version--pending" aria-disabled="true">
+              <span class="hub-version__name">Real photos</span>
+              <span class="hub-version__state">Awaiting photography</span>
+            </span>
+          </li>
+        </ul>
       </div>
     </li>
 
   </ul>
-
 </main>
 
 <footer class="hub-footer">

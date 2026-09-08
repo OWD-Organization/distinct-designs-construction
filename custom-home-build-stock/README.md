@@ -1,10 +1,12 @@
-# Distinct Designs Construction — Custom Home Build Landing Page
+# Distinct Designs Construction — Custom Home Build (stock photos)
 
-Production-ready landing page for `/custom-home-build`. Pure HTML/CSS/vanilla JS.
+Production-ready landing page for `/custom-home-build-stock/`. This is the
+**stock-photography** version; the real-photography twin lives at
+`/custom-home-build-real/`. Pure HTML/CSS/vanilla JS.
 **No frameworks, no build step, no dependencies.** Open `index.html` or serve the folder.
 
 ```
-custom-home-build/
+custom-home-build-stock/
 ├── index.html      # Page markup + FAQ JSON-LD
 ├── styles.css      # Design system + page styles (18 numbered sections)
 ├── script.js       # Nav, scroll reveal, accordion, form
@@ -71,7 +73,7 @@ grep -n 'data-placeholder' index.html
 
 | File | Slot | Target size | Replace with |
 |---|---|---|---|
-| `hero-desert-home.webp` (+ `-1200`) | Hero background | 1920×1280 / 1200×900 | Dusk exterior, dark lower third for text |
+| `hero-loggia.webp` (+ `-1200`) | Hero background | 1672×941 / 1200×675 | Signature exterior or loggia, wide 16:9 |
 | `process-blueprint.webp` | Process split | 1200×900 | Real renderings / permit set |
 | `process-break.webp` | Full-width break | 1600×750 | In-progress job site |
 | `project-la-mirada.webp` | Bento, tall | 900×1100 | La Mirada Remodel |
@@ -81,7 +83,17 @@ grep -n 'data-placeholder' index.html
 | `footer-cta.webp` | Lead section | 1600×1000 | Hero-quality exterior |
 
 Current placeholders are royalty-free Unsplash photography (Unsplash License —
-free for commercial use, no attribution required), re-encoded to WebP.
+free for commercial use, no attribution required), re-encoded to WebP. The hero
+is a client-supplied generated image, also re-encoded to WebP.
+
+`hero-desert-home.webp` (+ `-1200`) is the previous hero, now unreferenced —
+kept only so the earlier treatment is easy to restore. Safe to delete.
+
+**The hero scrim is tuned to the hero image.** `.hero__scrim` (styles.css §9)
+carries two stacked gradients sized for a *bright* photograph. If you swap in a
+dark hero, re-measure rather than keeping these values: sample the pixels behind
+each text block and check white/`#d1dae5` type still clears WCAG AA, then dial
+the alpha back so the photograph is not needlessly flattened.
 
 **Keep the hero's `width`/`height` attributes and `fetchpriority="high"`** — they
 protect CLS and LCP. Below-the-fold images use `loading="lazy"`.
