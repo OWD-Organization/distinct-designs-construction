@@ -76,10 +76,12 @@ Most images are **temporary stock placeholders**, marked two ways:
 
 | `footer-cta.webp` | Real interior for the lead section. Native 3:2. Note this slot's box **flips ratio** between breakpoints — roughly 0.60 (a tall column beside the form) at desktop, but 1.34 (a wide band above it) on mobile — so `cover` crops the sides at desktop and shows almost the full frame on mobile. A landscape source suits it because the mobile band is the wider of the two. |
 
-**The projects grid and the lead section are now real photography** — no
-`.grade`, no placeholders. `.grade` survives only on the hero and the
-full-width break. Once those two are replaced, the filter and its class can be
-removed altogether.
+| `process-break.webp` | Real dusk terrace for the full-width break. Native 16:9. This band is unusual: its height comes from the **image's own ratio** until `max-height: 640px` binds, so the source ratio changes the layout. At 16:9 the full frame shows on mobile, and wide desktops centre-crop to roughly 2.2–3.0, which still holds the string lights, fire bowl and spa. |
+
+**Only the hero is still a placeholder.** Everything else is real photography,
+and `.grade` now applies to exactly one image. Once the hero is replaced, delete
+the `.grade` rule (§6) and its last usage — it exists only to reconcile mixed
+stock sources.
 
 > **The project-tile scrim uses PIXEL stops, not percentages** (§11). The label
 > is a fixed size, so its protection band must be too. With percentages the
@@ -108,7 +110,7 @@ grep -n 'data-placeholder' index.html
 |---|---|---|---|
 | `hero-loggia.webp` (+ `-1200`) | Hero background | 1672×941 / 1200×675 | Signature exterior or loggia, wide 16:9 |
 | `process-crew.webp` | Process split | 1200×900 | **Already real** — crew in a finished build |
-| `process-break.webp` | Full-width break | 1600×750 | In-progress job site |
+| `process-break.webp` | Full-width break | 1920×1081 | **Already real** — desert terrace at dusk |
 | `project-la-mirada.webp` | Bento, tall | 900×1200 | **Already real** — La Mirada Remodel |
 | `project-hilltop.webp` | Bento | 900×675 | **Already real** — Hilltop Build |
 | `project-cubero.webp` | Bento | 900×675 | **Already real** — Cubero Build |
