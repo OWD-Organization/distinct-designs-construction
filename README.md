@@ -14,7 +14,7 @@ Deployed as a static site on Vercel.
 |---|---|---|
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
-| Whole-Home Remodel | `/whole-home-remodel/` | Not built yet |
+| Whole-Home Remodel | `/whole-home-remodel/` | Live |
 | Custom ADU & Guest Suite | `/custom-adu/` | Not built yet |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
