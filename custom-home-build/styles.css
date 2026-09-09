@@ -353,6 +353,11 @@ h4 {
 .site-nav__links a { color: var(--color-text-muted); transition: color var(--dur-fast) var(--ease-editorial); }
 .site-nav__links a:hover { color: var(--color-clay-text); }
 
+/* Click-to-call number: stronger than the plain nav links, on both the desktop
+   bar and the mobile menu. */
+.site-nav__phone { font-weight: 700; color: var(--color-charcoal); white-space: nowrap; }
+.site-nav__phone:hover { color: var(--color-clay-text); }
+
 .site-nav .btn--nav { display: none; }
 
 .site-nav__toggle {
