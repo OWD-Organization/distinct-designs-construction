@@ -840,6 +840,14 @@ h4 {
   background-position: right var(--space-sm) center;
   padding-right: var(--space-lg);
 }
+/* The native option list renders on the OS/browser popup (usually white), so
+   the light text inherited from the dark field is unreadable there. Force a
+   dark-on-light scheme for the options; the placeholder stays muted. */
+.lead-form select option {
+  color: var(--color-charcoal);
+  background-color: #ffffff;
+}
+.lead-form select option[disabled] { color: var(--color-text-muted); }
 
 .lead-form__note {
   margin-top: var(--space-sm);
