@@ -15,10 +15,16 @@ Deployed as a static site on Vercel.
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
-| Custom ADU & Guest Suite | `/custom-adu/` | Not built yet |
+| Custom ADU & Guest Suite | `/custom-adu/` | Live — copy only, gray placeholder images |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
-landing page. The two unbuilt pages render as visibly inert cards until they ship.
+landing page. All three pages are now built and linked.
+
+`/custom-adu/` is copy-complete but still has **no photography**: every image slot
+points at `images/placeholder.svg`, a flat gray block, and carries
+`data-placeholder="true"` plus a comment naming what belongs there. Its budget
+dropdown ranges are an assumption — the source copy does not specify them — and
+are marked with a TODO in the markup.
 
 ---
 
@@ -35,6 +41,8 @@ landing page. The two unbuilt pages render as visibly inert cards until they shi
 │   ├── script.js
 │   ├── images/
 │   └── README.md                       # Full page docs: tokens, classes, gotchas
+├── whole-home-remodel/                 # Landing page 2 — self-contained
+├── custom-adu/                         # Landing page 3 — copy only, no photos yet
 └── distinct-designs-landing-pages.html # Source copy for all three pages
 ```
 
