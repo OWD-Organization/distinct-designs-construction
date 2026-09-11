@@ -42,10 +42,14 @@
       <a href="#why-us">Why Us</a>
       <a href="#faq">FAQ</a>
       <a href="#areas-served">Areas Served</a>
-      <a class="site-nav__phone" href="tel:+17602214290" target="_blank" rel="noopener">(760) 221-4290</a>
     </nav>
 
-    <a href="#form" class="btn btn--nav">Schedule a Consultation</a>
+    <!-- Phone and CTA as a pair: outlined then gold. No target="_blank" on a
+         tel: link — it hands off to the dialer and never opens a tab. -->
+    <div class="site-nav__actions">
+      <a class="btn btn--nav" href="tel:+17602214290">(760) 221-4290</a>
+      <a class="btn btn--nav-primary" href="#form">Schedule a Consultation</a>
+    </div>
 
     <button class="site-nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav__mobile">
       <span></span><span></span><span></span>
@@ -58,7 +62,7 @@
     <a href="#why-us">Why Us</a>
     <a href="#faq">FAQ</a>
     <a href="#areas-served">Areas Served</a>
-    <a class="site-nav__phone" href="tel:+17602214290" target="_blank" rel="noopener">(760) 221-4290</a>
+    <a class="btn btn--nav" href="tel:+17602214290">(760) 221-4290</a>
     <a href="#form" class="btn btn--primary">Schedule a Consultation</a>
   </nav>
 </header>
@@ -93,8 +97,9 @@
       <h1>Custom Luxury Home Builder for the High Desert and Coachella Valley</h1>
       <p class="subhead">Ground-up custom homes from $870K to $5M+. One dedicated crew from groundbreaking to move-in, a budget you can trust before you sign, and daily progress you can see &mdash; even if you live out of state.</p>
       <nav class="hero-cta">
-        <a href="#form" class="btn btn--primary">Get Your Free Planning Guide</a>
-        <a href="#form" class="btn btn--secondary">Schedule a Consultation</a>
+        <!-- Same colour roles as the nav pair: outlined call, gold consultation. -->
+        <a href="tel:+17602214290" class="btn btn--secondary">Call (760) 221-4290</a>
+        <a href="#form" class="btn btn--primary">Schedule a Consultation</a>
       </nav>
     </div>
   </header>

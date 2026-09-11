@@ -282,13 +282,25 @@ h4 {
 }
 .btn--secondary:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--color-text-on-dark); }
 
+/* Nav-sized buttons. --nav is the outlined one (the phone), --nav-primary the
+   gold one (the consultation CTA). Same padding so they read as a pair. */
+.btn--nav,
+.btn--nav-primary {
+  padding: var(--space-2xs) var(--space-sm);
+}
 .btn--nav {
   background: transparent;
   color: var(--color-charcoal);
   border-color: var(--color-charcoal);
-  padding: var(--space-2xs) var(--space-sm);
 }
 .btn--nav:hover { background: var(--color-charcoal); color: var(--color-text-on-dark); }
+
+.btn--nav-primary {
+  background: var(--color-clay);
+  color: var(--color-on-accent);
+  border-color: var(--color-clay);
+}
+.btn--nav-primary:hover { background: var(--color-clay-dark); border-color: var(--color-clay-dark); }
 
 .btn--sticky {
   background: var(--color-clay);
@@ -349,16 +361,21 @@ h4 {
   font-size: var(--fs-small);
   font-weight: 600;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
+/* Never let flex squeeze a link until its label wraps: that makes the whole bar
+   taller and breaks --nav-h, which the hero height is calculated from. */
+.site-nav__links a { flex-shrink: 0; }
 .site-nav__links a { color: var(--color-text-muted); transition: color var(--dur-fast) var(--ease-editorial); }
 .site-nav__links a:hover { color: var(--color-clay-text); }
 
-/* Click-to-call number: stronger than the plain nav links, on both the desktop
-   bar and the mobile menu. */
-.site-nav__phone { font-weight: 700; color: var(--color-charcoal); white-space: nowrap; }
-.site-nav__phone:hover { color: var(--color-clay-text); }
-
-.site-nav .btn--nav { display: none; }
+/* Phone and consultation CTA sit together as a pair at the right of the bar. */
+.site-nav__actions {
+  display: none;
+  align-items: center;
+  gap: var(--space-2xs);
+  flex-shrink: 0;
+}
 
 .site-nav__toggle {
   display: flex;
@@ -946,12 +963,13 @@ h4 {
 }
 
 /* Desktop */
-@media (min-width: 1024px) {
-  .site-nav__toggle { display: none; }
-  .site-nav__links { display: flex; }
-  .site-nav .btn--nav { display: inline-flex; }
-  .site-nav__mobile { display: none; }
+/* Phone + CTA pair appears well before the link list does, so the number stays
+   visible on tablets while the hamburger still carries the links. */
+@media (min-width: 760px) {
+  .site-nav__actions { display: flex; }
+}
 
+@media (min-width: 1024px) {
   .sticky-cta p { display: block; }
 
   .section--split {
@@ -969,4 +987,12 @@ h4 {
 /* Large desktop */
 @media (min-width: 1400px) {
   .projects-grid { grid-auto-rows: 310px; }
+}
+
+/* Measured: logo + five nowrap links + the button pair need about 1090px, so the
+   link list waits until 1120 rather than being squeezed at 1024. */
+@media (min-width: 1120px) {
+  .site-nav__toggle { display: none; }
+  .site-nav__links { display: flex; }
+  .site-nav__mobile { display: none; }
 }

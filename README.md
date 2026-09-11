@@ -15,15 +15,15 @@ Deployed as a static site on Vercel.
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
-| Custom ADU & Guest Suite | `/custom-adu/` | Live — lead-section slot still placeholder |
+| Custom ADU & Guest Suite | `/custom-adu/` | Live |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.
 
 `/custom-adu/` shares its hero and its four project photographs with the other
-landing pages. Its one remaining slot — the lead section — still points at
-`images/placeholder.svg`, a flat gray block, carrying `data-placeholder="true"`
-plus a comment naming what belongs there. Its budget
+landing pages. `/custom-adu/` has no placeholders left; `placeholder.svg` is gone with them.
+Only the custom-home-build hero is still a stock photo, and it is the one image
+still carrying `.grade`. Its budget
 dropdown ranges are an assumption — the source copy does not specify them — and
 are marked with a TODO in the markup.
 
@@ -138,4 +138,10 @@ Pushes to `main` deploy to production; pull requests get preview URLs.
   verifying a swap, check the image's intrinsic size against the file on disk
   rather than trusting a screenshot.
 - **FAQ JSON-LD must stay in sync** with the visible FAQ copy on each page.
+- **`--nav-h` must equal the bar's real height at every width.** The hero is
+  `calc(100dvh - var(--nav-h))`, so a 2px drift shows up as the hero overshooting
+  the viewport. The link list therefore carries `white-space: nowrap` and
+  `flex-shrink: 0`: when flex squeezed a label into wrapping, the bar grew to 73px
+  and broke the calculation. Measured minimum for logo + links + button pair is
+  about 1090px, which is why the links appear at 1120 and not at 1024.
 - **Copy is client-supplied and used verbatim.** Do not paraphrase or condense it.
