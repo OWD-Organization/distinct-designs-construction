@@ -134,6 +134,25 @@ for exact slot dimensions.
 
 ---
 
+## Third-party scripts
+
+Both live in each landing page's `<head>`. The hub carries neither.
+
+| Script | Purpose | Notes |
+|---|---|---|
+| WhatConverts (`174814`) | call and form lead tracking | reads URL, referrer, query and hash |
+| Feedbucket (`87QNN1OkJMjb4UmrA33d`) | visual review widget | **review only** |
+
+> **Remove Feedbucket before these pages go live on the client's own domain.**
+> It renders a feedback button for every visitor, which is right for review on the
+> Vercel URL and wrong in front of prospects.
+
+```bash
+grep -rln feedbucket --include='*.html' .
+```
+
+---
+
 ## Deployment
 
 Deployed on Vercel as a static site — no framework preset, no build command.
