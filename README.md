@@ -30,9 +30,10 @@ are marked with a TODO in the markup.
 Shared photographs are duplicated into each page's own `images/` folder rather than
 served from one place, which keeps every page folder self-contained and
 independently deployable. The trade-off is that replacing a shared photo means
-replacing it in every folder that uses it. Currently shared: the four project
-photos (all three pages) and the garage hero (`hero-remodel.webp`, on the remodel
-and ADU pages).
+replacing it in every folder that uses it. Currently shared: the four project photos (all three pages) and the garage photo,
+which is the ADU hero as `hero-garage.webp`. It is named for its subject rather
+than its origin page, because the remodel hero is now a different photograph while
+still being called `hero-remodel.webp`.
 
 ---
 
