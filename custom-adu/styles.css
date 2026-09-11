@@ -900,7 +900,16 @@ h4 {
 /* Tablet / small desktop */
 @media (min-width: 768px) {
   .hero__content { padding: var(--space-xl) var(--space-md) var(--space-2xl); }
-  .hero__content .eyebrow { font-size: var(--fs-eyebrow); letter-spacing: 0.16em; margin-bottom: var(--space-md); }
+  /* Capped so the eyebrow sets as two lines instead of one long run across
+     the hero. In em, so it tracks the font size. Measured: every page's
+     eyebrow breaks to exactly two lines anywhere from 40em to ~59em, so 48em
+     sits mid-range and small copy edits will not tip it to one or three. */
+  .hero__content .eyebrow {
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.16em;
+    margin-bottom: var(--space-md);
+    max-width: 48em;
+  }
   .hero__content .subhead { font-size: var(--fs-body-lg); margin-top: var(--space-md); }
 
   .hero-cta { flex-direction: row; gap: var(--space-sm); margin-top: var(--space-lg); }
