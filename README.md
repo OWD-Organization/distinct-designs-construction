@@ -15,13 +15,13 @@ Deployed as a static site on Vercel.
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
-| Custom ADU & Guest Suite | `/custom-adu/` | Live — 3 slots still placeholder |
+| Custom ADU & Guest Suite | `/custom-adu/` | Live — 2 slots still placeholder |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.
 
 `/custom-adu/` shares its hero and its four project photographs with the other
-landing pages. Its three remaining slots — process, transition band and lead
+landing pages. Its two remaining slots — transition band and lead
 section — still point at `images/placeholder.svg`, a flat gray block, each carrying
 `data-placeholder="true"` plus a comment naming what belongs there. Its budget
 dropdown ranges are an assumption — the source copy does not specify them — and
