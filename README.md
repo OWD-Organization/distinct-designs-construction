@@ -15,22 +15,23 @@ Deployed as a static site on Vercel.
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
-| Custom ADU & Guest Suite | `/custom-adu/` | Live — 2 slots still placeholder |
+| Custom ADU & Guest Suite | `/custom-adu/` | Live — lead-section slot still placeholder |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.
 
 `/custom-adu/` shares its hero and its four project photographs with the other
-landing pages. Its two remaining slots — transition band and lead
-section — still point at `images/placeholder.svg`, a flat gray block, each carrying
-`data-placeholder="true"` plus a comment naming what belongs there. Its budget
+landing pages. Its one remaining slot — the lead section — still points at
+`images/placeholder.svg`, a flat gray block, carrying `data-placeholder="true"`
+plus a comment naming what belongs there. Its budget
 dropdown ranges are an assumption — the source copy does not specify them — and
 are marked with a TODO in the markup.
 
 Shared photographs are duplicated into each page's own `images/` folder rather than
 served from one place, which keeps every page folder self-contained and
 independently deployable. The trade-off is that replacing a shared photo means
-replacing it in every folder that uses it. Currently shared: the four project photos (all three pages) and the garage photo,
+replacing it in every folder that uses it. Currently shared: the four project photos (all three pages), the transition-band
+photo (`process-break.webp`, on the remodel and ADU pages), and the garage photo,
 which is the ADU hero as `hero-garage.webp`. It is named for its subject rather
 than its origin page, because the remodel hero is now a different photograph while
 still being called `hero-remodel.webp`.
