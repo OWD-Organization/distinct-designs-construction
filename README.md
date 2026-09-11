@@ -15,16 +15,21 @@ Deployed as a static site on Vercel.
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
-| Custom ADU & Guest Suite | `/custom-adu/` | Live — copy only, gray placeholder images |
+| Custom ADU & Guest Suite | `/custom-adu/` | Live — real project photos, 4 slots still placeholder |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.
 
-`/custom-adu/` is copy-complete but still has **no photography**: every image slot
-points at `images/placeholder.svg`, a flat gray block, and carries
+`/custom-adu/` uses the same real project photography as the other two pages in its
+projects grid. Its four remaining slots — hero, process, transition band and lead
+section — still point at `images/placeholder.svg`, a flat gray block, each carrying
 `data-placeholder="true"` plus a comment naming what belongs there. Its budget
 dropdown ranges are an assumption — the source copy does not specify them — and
 are marked with a TODO in the markup.
+
+The four project photographs are duplicated into each page's own `images/` folder
+rather than shared from one place, which keeps every page folder self-contained and
+independently deployable. Replacing a project photo means replacing it in all three.
 
 ---
 
