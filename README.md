@@ -30,9 +30,14 @@ are marked with a TODO in the markup.
 Shared photographs are duplicated into each page's own `images/` folder rather than
 served from one place, which keeps every page folder self-contained and
 independently deployable. The trade-off is that replacing a shared photo means
-replacing it in every folder that uses it. Currently shared: the four project photos (all three pages), the transition-band
-photo (`process-break.webp`, on the remodel and ADU pages), and the garage photo,
-which is the ADU hero as `hero-garage.webp`. It is named for its subject rather
+replacing it in every folder that uses it. Currently shared: the four project photos, on all three pages.
+
+Two photographs were shared and then diverged, so on the ADU page they are named
+for their subject rather than their slot or origin: `hero-garage.webp` (the garage,
+once the remodel hero) and `process-break-patio.webp` (the sunset patio, once the
+remodel transition band). Both slots on the remodel page now hold different
+photographs under their original names. When a shared photo diverges, rename the
+copy rather than leaving two files with one name and two contents. It is named for its subject rather
 than its origin page, because the remodel hero is now a different photograph while
 still being called `hero-remodel.webp`.
 
