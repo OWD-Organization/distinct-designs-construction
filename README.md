@@ -20,26 +20,40 @@ Deployed as a static site on Vercel.
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.
 
-`/custom-adu/` shares its hero and its four project photographs with the other
-landing pages. `/custom-adu/` has no placeholders left; `placeholder.svg` is gone with them.
-Only the custom-home-build hero is still a stock photo, and it is the one image
-still carrying `.grade`. Its budget
-dropdown ranges are an assumption — the source copy does not specify them — and
-are marked with a TODO in the markup.
+The remodel and ADU pages are fully photographed, and `placeholder.svg` is gone
+with their last gray blocks. **One placeholder remains: the custom-home-build
+hero**, which is also the only image still carrying the `.grade` filter — once it
+is replaced, that rule and its last usage can be deleted.
 
-Shared photographs are duplicated into each page's own `images/` folder rather than
+The three hub card images are also stand-ins, but the hub is an internal
+`noindex` index, so they are lower priority.
+
+The ADU page's budget dropdown ranges are an assumption — the source copy does not
+specify them — and are marked with a TODO in the markup.
+
+### Shared photographs
+
+Shared photos are duplicated into each page's own `images/` folder rather than
 served from one place, which keeps every page folder self-contained and
-independently deployable. The trade-off is that replacing a shared photo means
-replacing it in every folder that uses it. Currently shared: the four project photos, on all three pages.
+independently deployable. The trade-off: replacing a shared photo means replacing
+it in every folder that uses it.
 
-Two photographs were shared and then diverged, so on the ADU page they are named
-for their subject rather than their slot or origin: `hero-garage.webp` (the garage,
-once the remodel hero) and `process-break-patio.webp` (the sunset patio, once the
-remodel transition band). Both slots on the remodel page now hold different
-photographs under their original names. When a shared photo diverges, rename the
-copy rather than leaving two files with one name and two contents. It is named for its subject rather
-than its origin page, because the remodel hero is now a different photograph while
-still being called `hero-remodel.webp`.
+| Photo | Used on |
+|---|---|
+| the four project tiles | all three pages |
+| `footer-cta.webp` (great room) | custom-home-build, custom-adu |
+| `process-crew.webp` | each page has its own crew photo |
+
+Two photos were shared and then diverged. On the ADU page they are named for their
+**subject** rather than their slot or origin, so no two files share a name with
+different contents:
+
+- `hero-garage.webp` — the garage, once the remodel hero
+- `process-break-patio.webp` — the sunset patio, once the remodel transition band
+
+Both of those slots on the remodel page now hold different photographs under their
+original names. **When a shared photo diverges, rename the copy** rather than
+leaving two files with one name and two contents.
 
 ---
 
@@ -57,7 +71,7 @@ still being called `hero-remodel.webp`.
 │   ├── images/
 │   └── README.md                       # Full page docs: tokens, classes, gotchas
 ├── whole-home-remodel/                 # Landing page 2 — self-contained
-├── custom-adu/                         # Landing page 3 — copy only, no photos yet
+├── custom-adu/                         # Landing page 3 — self-contained
 └── distinct-designs-landing-pages.html # Source copy for all three pages
 ```
 
@@ -80,7 +94,7 @@ to `/custom-home-build/` will not resolve. Use a server.
 
 ---
 
-## Adding the remaining two pages
+## Adding another page
 
 Full instructions are in [`custom-home-build/README.md`](custom-home-build/README.md).
 Short version:
@@ -101,18 +115,22 @@ retune by editing those values, not individual rules.
 
 ## Photography
 
-**Every image is currently a temporary stock placeholder** (royalty-free Unsplash,
-re-encoded to WebP). They are all marked with `data-placeholder="true"` plus an
-HTML comment describing what belongs in the slot.
+The landing pages carry real project photography throughout. Only the
+custom-home-build hero is still stock.
 
-Find every one that still needs swapping:
+Placeholders are marked two ways, so any that reappear are easy to find:
 
 ```bash
 grep -rn 'data-placeholder' --include='*.html' .
 ```
 
-Real project photography (La Mirada, Hilltop, Cubero, Alturas) replaces these.
-See the per-page README for exact slot dimensions.
+That currently returns the custom-home-build hero plus the three hub card images,
+which are stand-ins on an internal `noindex` page.
+
+When swapping a real photo in, drop both the `.grade` class and the
+`data-placeholder` attribute — the grade exists only to reconcile mismatched stock
+sources and skews skin tones over photographs of people. See the per-page README
+for exact slot dimensions.
 
 ---
 
