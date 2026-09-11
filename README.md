@@ -15,21 +15,24 @@ Deployed as a static site on Vercel.
 | Hub (index of landing pages) | `/` | Live |
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
-| Custom ADU & Guest Suite | `/custom-adu/` | Live — real project photos, 4 slots still placeholder |
+| Custom ADU & Guest Suite | `/custom-adu/` | Live — 3 slots still placeholder |
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.
 
-`/custom-adu/` uses the same real project photography as the other two pages in its
-projects grid. Its four remaining slots — hero, process, transition band and lead
+`/custom-adu/` shares its hero and its four project photographs with the other
+landing pages. Its three remaining slots — process, transition band and lead
 section — still point at `images/placeholder.svg`, a flat gray block, each carrying
 `data-placeholder="true"` plus a comment naming what belongs there. Its budget
 dropdown ranges are an assumption — the source copy does not specify them — and
 are marked with a TODO in the markup.
 
-The four project photographs are duplicated into each page's own `images/` folder
-rather than shared from one place, which keeps every page folder self-contained and
-independently deployable. Replacing a project photo means replacing it in all three.
+Shared photographs are duplicated into each page's own `images/` folder rather than
+served from one place, which keeps every page folder self-contained and
+independently deployable. The trade-off is that replacing a shared photo means
+replacing it in every folder that uses it. Currently shared: the four project
+photos (all three pages) and the garage hero (`hero-remodel.webp`, on the remodel
+and ADU pages).
 
 ---
 
