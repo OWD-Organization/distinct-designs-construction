@@ -542,7 +542,11 @@ h4 {
 .hero--form .hero__content { padding: 0; max-width: none; }
 
 .hero__form-card {
-  background: var(--color-charcoal);
+  /* 90% so the photograph reads through the card. Deliberately rgba on the
+     background, not opacity on the element: opacity would fade the labels,
+     fields and button too and drop their contrast with them.
+     Value is --color-charcoal (#0f172a). */
+  background: rgba(15, 23, 42, 0.9);
   border: var(--border-w) solid var(--color-hairline-on-dark);
   border-radius: var(--radius);
   padding: var(--space-sm);
