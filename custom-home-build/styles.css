@@ -570,6 +570,11 @@ h4 {
      this headline in four lines. Measured: 3.25rem brings every page's headline
      to three, and the grid column already caps the measure without a max-width. */
   .hero__form-card { padding: var(--space-md); }
+
+  /* Between 1024 and 1200 the hero is already split, so the card is only
+     ~390-460px wide and two columns would leave ~147px inputs. One column
+     until the card can carry two comfortably. */
+  .hero__form-card .lead-form { grid-template-columns: 1fr; }
   .hero--form .hero__content h1 { font-size: 3.25rem; max-width: none; }
   .hero--form .hero__content .subhead { max-width: 40ch; }
 }
@@ -880,7 +885,10 @@ h4 {
   gap: var(--space-md);
   max-width: 640px;
 }
-.lead-form__row { display: flex; flex-direction: column; gap: var(--space-3xs); }
+/* min-width: 0 so a 1fr track can shrink past the row's min-content. Without it
+   the inputs' intrinsic width (size/cols defaults) floors each track at ~257px,
+   and in the narrow hero card the two columns overflow their container. */
+.lead-form__row { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; }
 .lead-form__row--full { grid-column: 1 / -1; }
 
 .lead-form label {
@@ -893,6 +901,9 @@ h4 {
 .lead-form input,
 .lead-form select,
 .lead-form textarea {
+  /* fill the row rather than carrying their own intrinsic width */
+  width: 100%;
+  min-width: 0;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   color: var(--color-text-on-dark);
@@ -1040,6 +1051,10 @@ h4 {
 
   .hero__content h1 { max-width: 24ch; }
   .hero__content .subhead { max-width: 50ch; }
+}
+
+@media (min-width: 1200px) {
+  .hero__form-card .lead-form { grid-template-columns: 1fr 1fr; }
 }
 
 /* Large desktop */

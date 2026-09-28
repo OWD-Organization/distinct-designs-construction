@@ -202,6 +202,12 @@ Pushes to `main` deploy to production; pull requests get preview URLs.
   `flex-shrink: 0`: when flex squeezed a label into wrapping, the bar grew to 73px
   and broke the calculation. Measured minimum for logo + links + button pair is
   about 1090px, which is why the links appear at 1120 and not at 1024.
+- **Form fields must be able to shrink.** `.lead-form__row` carries `min-width: 0`
+  and the controls carry `width: 100%`. A `1fr` track is `minmax(auto, 1fr)`, and
+  that `auto` floor is the item's min-content: inputs and textareas bring their own
+  intrinsic width from the `size`/`cols` defaults, which floored each column at
+  ~257px and pushed the two-column form outside the narrow hero card. Removing
+  either declaration brings the overflow back.
 - **Copy is client-supplied and used verbatim.** Do not paraphrase or condense it.
   One deliberate exception: em dashes were removed from all three landing pages at
   the client's request. Each was replaced with the punctuation its own sentence
