@@ -1,5 +1,5 @@
 /* =================================================================
-   DISTINCT DESIGNS CONSTRUCTION — SITE INTERACTIONS
+   DISTINCT DESIGNS CONSTRUCTION: SITE INTERACTIONS
    Vanilla JS only. No dependencies.
    ================================================================= */
 
@@ -154,7 +154,7 @@
 
   /* ---------------------------------------------------------------
      Lead form handling
-     Note: no backend wired up yet — replace this handler's success
+     Note: no backend wired up yet. Replace this handler's success
      branch with a real fetch() to your CRM/email endpoint.
      --------------------------------------------------------------- */
   var leadForm = document.getElementById("lead-form");
@@ -171,7 +171,7 @@
       }
 
       // TODO: wire to real submission endpoint (CRM, email service, etc.)
-      leadFormNote.textContent = "Thank you — Nick's team will reach out within one business day.";
+      leadFormNote.textContent = "Thank you. Nick's team will reach out within one business day.";
       leadForm.reset();
     });
   }

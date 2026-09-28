@@ -16,6 +16,27 @@ Deployed as a static site on Vercel.
 | Custom Home Build | `/custom-home-build/` | Live |
 | Whole-Home Remodel | `/whole-home-remodel/` | Live |
 | Custom ADU & Guest Suite | `/custom-adu/` | Live |
+| Custom Home Build, hero form | `/custom-home-build-hero-form/` | Live |
+| Whole-Home Remodel, hero form | `/whole-home-remodel-hero-form/` | Live |
+| Custom ADU, hero form | `/custom-adu-hero-form/` | Live |
+
+### Hero-form variants
+
+Each landing page has a `-hero-form` twin: same copy, same photography, same form
+fields, with the lead form moved from the closing section into the hero so it is
+visible without scrolling. Built for an A/B test on form placement.
+
+- The form was **moved**, not duplicated. Two copies would mean duplicate `id`s,
+  which breaks `<label for>` and `getElementById`, and would muddy the test.
+- The hero form carries `id="form"`, so the nav, sticky bar and footer links all
+  still resolve. The closing section keeps its photo, heading and copy, and gains
+  a button back up to the form.
+- The hero CTA row drops "Schedule a Consultation" there, since it would scroll to
+  a form already on screen. The call button stays.
+- Variants keep the same `<link rel="canonical">` as their twin, pointing at the
+  client's real URL, so the pair is not treated as duplicate content.
+- Variant CSS lives in section 9.b of the shared stylesheet and is inert on the
+  standard pages, which keeps all six stylesheets byte-identical.
 
 The hub at `/` is an internal index — it is `noindex, nofollow` and links to each
 landing page. All three pages are now built and linked.

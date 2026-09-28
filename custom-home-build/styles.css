@@ -309,7 +309,7 @@ h4 {
 }
 .btn--sticky:hover { background: var(--color-clay-dark); }
 
-.btn--full { width: 100%; }
+.btn--full { width: 100%; white-space: normal; }
 
 /* -----------------------------------------------------------------
    8. SITE NAVIGATION
@@ -515,6 +515,64 @@ h4 {
   margin-top: var(--space-md);
 }
 .hero-cta a { width: 100%; }
+
+/* -----------------------------------------------------------------
+   9.b HERO VARIANT: LEAD FORM IN THE HERO
+   Used by the *-hero-form pages. Unused rules on the standard pages,
+   kept here so all six stylesheets stay byte-identical.
+   ----------------------------------------------------------------- */
+.hero--form { align-items: center; }
+
+.hero--form .hero__inner > * { min-width: 0; }
+
+.hero--form .hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+/* the inner grid owns the padding now, so the copy block drops its own */
+.hero--form .hero__content { padding: 0; max-width: none; }
+
+.hero__form-card {
+  background: var(--color-charcoal);
+  border: var(--border-w) solid var(--color-hairline-on-dark);
+  border-radius: var(--radius);
+  padding: var(--space-sm);
+  color: var(--color-text-on-dark);
+}
+.hero__form-title {
+  font-size: 1.7rem;
+  color: var(--color-text-on-dark);
+}
+.hero__form-note {
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--fs-small);
+  margin: var(--space-2xs) 0 var(--space-md);
+}
+/* the form is already styled for a dark surface, so it needs no overrides */
+.hero__form-card .lead-form { max-width: none; }
+
+@media (min-width: 1024px) {
+  .hero--form .hero__inner {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--space-2xl);
+    padding: var(--space-xl) var(--space-md);
+  }
+  /* The copy column is about 560px here, so the full-width hero size would set
+     this headline in four lines. Measured: 3.25rem brings every page's headline
+     to three, and the grid column already caps the measure without a max-width. */
+  .hero__form-card { padding: var(--space-md); }
+  .hero--form .hero__content h1 { font-size: 3.25rem; max-width: none; }
+  .hero--form .hero__content .subhead { max-width: 40ch; }
+}
 
 /* -----------------------------------------------------------------
    10. PROCESS STEPS
