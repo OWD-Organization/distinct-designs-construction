@@ -182,3 +182,8 @@ Pushes to `main` deploy to production; pull requests get preview URLs.
   and broke the calculation. Measured minimum for logo + links + button pair is
   about 1090px, which is why the links appear at 1120 and not at 1024.
 - **Copy is client-supplied and used verbatim.** Do not paraphrase or condense it.
+  One deliberate exception: em dashes were removed from all three landing pages at
+  the client's request. Each was replaced with the punctuation its own sentence
+  needed (a comma, a colon, a full stop, or parentheses for a matched pair) rather
+  than by one blanket substitution. Wording is unchanged. En dashes stay in the
+  budget ranges, where they are the correct mark for a numeric span.
