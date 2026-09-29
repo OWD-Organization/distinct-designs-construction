@@ -22,6 +22,16 @@ EMAIL = g.EMAIL
 GUIDE = g.GUIDE_FORM
 CONTACT = g.CONTACT_FORM
 
+# Cover of the published flipbook (the planning-guide page embeds the same Heyzine
+# book). Flat cover, real title. The CSS mockup adds the tilt and shadow.
+COVER_ALT = "The Ultimate Planning Guide: What It Really Takes to Build a $1M+ Custom Home in the Desert, by Nicholas Aguilar"
+
+
+def book(slug):
+    return f"""<figure class="book">
+  <img src="{g.prefix(slug)}images/site/planning-guide-cover.jpg" alt="{COVER_ALT}" width="1082" height="1400" loading="lazy">
+</figure>"""
+
 
 def build_all():
     home()
@@ -83,14 +93,15 @@ def home():
   <p class="page-intro" style="margin-top:1.5rem">Also: <a href="{HREF(slug, "services/remodels")}">designer kitchens and bathrooms</a>, and full-service architecture and engineering coordination. <a href="{HREF(slug, "services")}">See every service</a>.</p>
 </section>
 <section class="section section--tinted" id="guide">
-  <div class="two-col">
-    <div>
+  <div class="guide-layout">
+    {book(slug)}
+    <div class="guide-layout__copy">
       <p class="eyebrow">Free guide</p>
       <h2>Get your free guide. Know before you hire.</h2>
       <p class="page-intro">Two homes can be the same size, yet one costs $900K and the other $2.5M. Most builders never explain why.</p>
       <p class="guide-cta"><a class="btn btn--primary" href="{HREF(slug, "planning-guide")}">Read the planning guide</a></p>
     </div>
-    <div class="reveal">{F(GUIDE, "Get your free planning guide")}</div>
+    <div class="guide-layout__form reveal">{F(GUIDE, "Get your free planning guide")}</div>
   </div>
 </section>
 <section class="section section--split">
@@ -390,7 +401,7 @@ def service_build():
   {R(slug, [("Whole-home remodels", "services/whole-home-remodel"), ("Custom ADUs", "services/custom-adu"), ("All services", "services"), ("Contact", "contact")])}
 </section>
 <section class="lead-section" id="form">
-  <div class="lead-section__media"><img src="{p}images/footer-cta-home.webp" alt="Finished great room used as the custom-home consultation backdrop" width="1600" height="1066" loading="lazy"></div>
+  <div class="lead-section__media lead-section__media--book">{book(slug)}</div>
   <div class="lead-section__content">
     <h2>Start your custom home journey</h2>
     <p>Building at this level is about trust, not the lowest bid. Talk to Nick directly about your project. No call center, no sales script. Call <a href="tel:{TEL}">{PHONE}</a>.</p>
@@ -470,7 +481,7 @@ def service_remodel():
   {R(slug, [("Custom homes", "services/custom-home-build"), ("Custom ADUs", "services/custom-adu"), ("All services", "services"), ("Contact", "contact")])}
 </section>
 <section class="lead-section" id="form">
-  <div class="lead-section__media"><img src="{p}images/footer-cta-remodel.webp" alt="Finished open-plan living room and kitchen remodel with wood floors, a bright island and desert-view windows" width="1600" height="1200" loading="lazy"></div>
+  <div class="lead-section__media lead-section__media--book">{book(slug)}</div>
   <div class="lead-section__content">
     <h2>Start your remodel the right way</h2>
     <p>A remodel at this level is about trust, not the lowest bid. Talk to Nick directly about your project. Call <a href="tel:{TEL}">{PHONE}</a>.</p>
@@ -543,7 +554,7 @@ def service_adu():
   {R(slug, [("Custom homes", "services/custom-home-build"), ("Whole-home remodels", "services/whole-home-remodel"), ("All services", "services"), ("Contact", "contact")])}
 </section>
 <section class="lead-section" id="form">
-  <div class="lead-section__media"><img src="{p}images/footer-cta.webp" alt="Finished interior used beside the ADU consultation form" width="1600" height="1200" loading="lazy"></div>
+  <div class="lead-section__media lead-section__media--book">{book(slug)}</div>
   <div class="lead-section__content">
     <h2>Add value to your property the right way</h2>
     <p>Talk to Nick directly about your ADU or guest suite. Call <a href="tel:{TEL}">{PHONE}</a>.</p>
@@ -1132,12 +1143,12 @@ def guides():
   <h1>{h1}</h1>
   <p class="page-intro">{sub}</p>
   <ul class="check-list" style="margin-top:1.25rem">{bl}</ul>
-  <div class="two-col guide-split" style="margin-top:2rem">
-    <div>
+  <div class="guide-layout guide-layout--form" style="margin-top:2rem">
+    {book(slug)}
+    <div class="guide-layout__form">
       <p><strong>Free · instant download</strong></p>
-      <img src="{p}images/site/Distinct-Design-Planning-Guide-2.png" alt="Distinct Designs planning guide cover" width="600" height="780" loading="lazy">
+      {F(form_id, "Download the planning guide")}
     </div>
-    <div>{F(form_id, "Download the planning guide")}</div>
   </div>
   <div class="stat-row" style="margin-top:2rem">
     <article class="stat-card"><span>4.9★</span><small>15+ reviews</small></article>
@@ -1188,10 +1199,15 @@ def guides():
   </div>
 </section>
 <section class="section" id="form">
-  <p class="eyebrow">Get the guide</p>
-  <h2>{cta_h}</h2>
-  <p>Enter your details and we'll send the full Ultimate Planning Guide straight to your inbox.</p>
-  {F(GUIDE, "Get the free guide")}
+  <div class="guide-layout guide-layout--form">
+    {book(slug)}
+    <div class="guide-layout__copy">
+      <p class="eyebrow">Get the guide</p>
+      <h2>{cta_h}</h2>
+      <p>Enter your details and we'll send the full Ultimate Planning Guide straight to your inbox.</p>
+      {F(GUIDE, "Get the free guide")}
+    </div>
+  </div>
   <p style="margin-top:2rem">Third-generation luxury custom home building and whole-home remodels across the High Desert and Coachella Valley. CA License #1145786.</p>
   <p><a href="tel:{TEL}">760·221·4290</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
   <p>Yucca Valley · Joshua Tree · Palm Springs · Palm Desert · Rancho Mirage · La Quinta</p>
