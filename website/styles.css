@@ -1272,6 +1272,15 @@ a.city-link {
 .hero--page { min-height: 52vh; }
 .hero--page .hero__content h1 { max-width: 18ch; }
 
+/* The crew photo is 4:3 and the people stand in the upper two thirds.
+   Other heroes stay anchored to the bottom (sky above the house). This one
+   starts at the top, and on a wide screen it grows with the width so the
+   crop still includes faces and bodies, not just the floor. */
+.hero--team .hero__image { object-position: center top; }
+@media (min-width: 1100px) {
+  .hero--team { min-height: min(50vw, 85vh); }
+}
+
 .page-intro { color: var(--color-text-muted); max-width: 62ch; }
 
 .prose { max-width: 68ch; }

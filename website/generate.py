@@ -189,24 +189,26 @@ def current(slug, target):
     return ""
 
 
-def dropdown_menu(slug, label, links, menu_id, active):
+def dropdown_menu(slug, label, links, menu_id, active, start_open=False):
     current_attr = ' aria-current="true"' if active else ""
+    expanded = "true" if start_open else "false"
+    open_class = " is-open" if start_open else ""
     items = []
     for item_label, target in links:
         items.append(
             f'<a role="menuitem" href="{href(slug, target)}"{current(slug, target)}>{item_label}</a>'
         )
-    return f"""<div class="nav-dropdown">
-      <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="{menu_id}"{current_attr}>{label}</button>
+    return f"""<div class="nav-dropdown{open_class}">
+      <button type="button" class="nav-dropdown__toggle" aria-expanded="{expanded}" aria-haspopup="true" aria-controls="{menu_id}"{current_attr}>{label}</button>
       <div class="nav-dropdown__panel" id="{menu_id}" role="menu" aria-label="{label}">
         {"".join(items)}
       </div>
     </div>"""
 
 
-def service_menu(slug, menu_id):
+def service_menu(slug, menu_id, start_open=False):
     on_services = slug == "services" or slug.startswith("services/")
-    return dropdown_menu(slug, "Services", SERVICE_LINKS, menu_id, on_services)
+    return dropdown_menu(slug, "Services", SERVICE_LINKS, menu_id, on_services, start_open)
 
 
 def area_menu(slug, menu_id):
@@ -217,7 +219,7 @@ def area_menu(slug, menu_id):
 def nav(slug):
     p = prefix(slug)
     links = [service_menu(slug, "services-menu"), area_menu(slug, "areas-menu")]
-    mobile = [service_menu(slug, "services-menu-mobile"), area_menu(slug, "areas-menu-mobile")]
+    mobile = [service_menu(slug, "services-menu-mobile", start_open=True), area_menu(slug, "areas-menu-mobile")]
     for label, target in NAV:
         links.append(
             f'<a href="{href(slug, target)}"{current(slug, target)}>{label}</a>'

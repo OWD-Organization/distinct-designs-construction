@@ -161,7 +161,7 @@ def about():
     slug = "about"
     p = g.prefix(slug)
     body = f"""
-<header class="hero hero--page">
+<header class="hero hero--page hero--team">
   <img class="hero__image" src="{p}images/process-crew-home.webp" alt="The Distinct Designs crew inside a completed custom home, desert mountains beyond the open sliders" width="1200" height="900">
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__content reveal">

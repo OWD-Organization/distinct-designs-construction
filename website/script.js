@@ -40,22 +40,36 @@
   var navToggle = document.getElementById("nav-toggle");
   var mobileNav = document.getElementById("site-nav__mobile");
 
-  if (navToggle && mobileNav) {
-    navToggle.addEventListener("click", function () {
-      var isOpen = navToggle.getAttribute("aria-expanded") === "true";
-      navToggle.setAttribute("aria-expanded", String(!isOpen));
-      navToggle.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
-      mobileNav.classList.toggle("is-open", !isOpen);
-    });
+    function setMobileDropdown(id, open) {
+      var panel = document.getElementById(id);
+      if (!panel) return;
+      var root = panel.closest(".nav-dropdown");
+      var button = root && root.querySelector(".nav-dropdown__toggle");
+      if (!root || !button) return;
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      root.classList.toggle("is-open", open);
+    }
 
-    mobileNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navToggle.setAttribute("aria-expanded", "false");
-        navToggle.setAttribute("aria-label", "Open menu");
-        mobileNav.classList.remove("is-open");
+    if (navToggle && mobileNav) {
+      navToggle.addEventListener("click", function () {
+        var isOpen = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+        navToggle.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+        mobileNav.classList.toggle("is-open", !isOpen);
+        if (!isOpen) {
+          setMobileDropdown("services-menu-mobile", true);
+          setMobileDropdown("areas-menu-mobile", false);
+        }
       });
-    });
-  }
+
+      mobileNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.setAttribute("aria-label", "Open menu");
+          mobileNav.classList.remove("is-open");
+        });
+      });
+    }
 
   /* ---------------------------------------------------------------
      Header dropdowns (Services, Service Areas)
