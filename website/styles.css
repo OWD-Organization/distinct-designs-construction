@@ -274,6 +274,19 @@ h4 {
   border-color: var(--color-clay);
 }
 .btn--primary:hover { background: var(--color-clay-dark); border-color: var(--color-clay-dark); }
+.btn--primary:focus-visible {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 3px;
+}
+
+/* Free-guide CTA. Same gold fill as the header consultation button, with
+   roomier padding so it reads against the tinted section. */
+.guide-cta { margin-top: var(--space-sm); }
+.guide-cta .btn { padding: 1rem 1.5rem; }
+.guide-cta .btn::after {
+  content: "→";
+  margin-left: 0.6em;
+}
 
 .btn--secondary {
   background: transparent;

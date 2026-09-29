@@ -88,7 +88,7 @@ def home():
       <p class="eyebrow">Free guide</p>
       <h2>Get your free guide. Know before you hire.</h2>
       <p class="page-intro">Two homes can be the same size, yet one costs $900K and the other $2.5M. Most builders never explain why.</p>
-      <p><a href="{HREF(slug, "planning-guide")}">Read the planning guide</a></p>
+      <p class="guide-cta"><a class="btn btn--primary" href="{HREF(slug, "planning-guide")}">Read the planning guide</a></p>
     </div>
     <div class="reveal">{F(GUIDE, "Get your free planning guide")}</div>
   </div>
