@@ -1066,11 +1066,11 @@ h4 {
   .projects-grid { grid-auto-rows: 310px; }
 }
 
-/* Measured: logo + five nowrap links + the button pair need about 1090px, so the
-   link list waits until 1120 rather than being squeezed at 1024. */
-@media (min-width: 1120px) {
+/* Measured: logo + Services + Service Areas + three links + the button pair
+   need about 1240px, so the link list waits until 1280 rather than wrapping. */
+@media (min-width: 1280px) {
   .site-nav__toggle { display: none; }
-  .site-nav__links { display: flex; }
+  .site-nav__links { display: flex; gap: var(--space-sm); }
   .site-nav__mobile { display: none; }
 }
 
@@ -1142,7 +1142,7 @@ h4 {
 .nav-dropdown__panel a:focus-visible,
 .nav-dropdown__panel a[aria-current="page"] { color: var(--color-clay-text); }
 
-@media (min-width: 1120px) {
+@media (min-width: 1280px) {
   .site-nav__links .nav-dropdown:hover .nav-dropdown__panel,
   .site-nav__links .nav-dropdown:focus-within .nav-dropdown__panel,
   .site-nav__links .nav-dropdown.is-open .nav-dropdown__panel { display: block; }
@@ -1177,9 +1177,18 @@ h4 {
 }
 
 .site-nav__mobile.is-open {
-  max-height: min(80vh, 640px);
+  max-height: min(92vh, 900px);
   overflow: auto;
 }
+
+a.city-link {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.site-footer a.city-link:hover,
+.hero a.city-link:hover { color: var(--color-text-on-dark); }
+
+.hero--area .hero__content h1 { max-width: 28ch; }
 
 .hero--page { min-height: 52vh; }
 .hero--page .hero__content h1 { max-width: 18ch; }

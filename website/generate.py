@@ -8,6 +8,8 @@ Output is plain HTML. Vercel does not need this script.
 """
 
 import json
+import re
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -70,6 +72,17 @@ SERVICE_LINKS = [
     ("Whole House Remodel", "services/whole-home-remodel"),
     ("Custom ADU and Guest Suite", "services/custom-adu"),
 ]
+# These six already appear on the published service-area list. Each has a page.
+# Other cities in AREAS stay as text until a page exists for them.
+AREA_LINKS = [
+    ("Yucca Valley", "service-areas/yucca-valley"),
+    ("Joshua Tree", "service-areas/joshua-tree"),
+    ("Palm Springs", "service-areas/palm-springs"),
+    ("Palm Desert", "service-areas/palm-desert"),
+    ("La Quinta", "service-areas/la-quinta"),
+    ("Indian Wells", "service-areas/indian-wells"),
+]
+AREA_TARGET = dict(AREA_LINKS)
 MOBILE_EXTRA = [
     ("Remodels", "remodels"),
     ("Planning Guide", "planning-guide"),
@@ -172,26 +185,35 @@ def current(slug, target):
     return ""
 
 
-def service_menu(slug, menu_id):
-    on_services = slug == "services" or slug.startswith("services/")
-    current_attr = ' aria-current="true"' if on_services else ""
+def dropdown_menu(slug, label, links, menu_id, active):
+    current_attr = ' aria-current="true"' if active else ""
     items = []
-    for label, target in SERVICE_LINKS:
+    for item_label, target in links:
         items.append(
-            f'<a role="menuitem" href="{href(slug, target)}"{current(slug, target)}>{label}</a>'
+            f'<a role="menuitem" href="{href(slug, target)}"{current(slug, target)}>{item_label}</a>'
         )
     return f"""<div class="nav-dropdown">
-      <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="{menu_id}"{current_attr}>Services</button>
-      <div class="nav-dropdown__panel" id="{menu_id}" role="menu" aria-label="Services">
+      <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="{menu_id}"{current_attr}>{label}</button>
+      <div class="nav-dropdown__panel" id="{menu_id}" role="menu" aria-label="{label}">
         {"".join(items)}
       </div>
     </div>"""
 
 
+def service_menu(slug, menu_id):
+    on_services = slug == "services" or slug.startswith("services/")
+    return dropdown_menu(slug, "Services", SERVICE_LINKS, menu_id, on_services)
+
+
+def area_menu(slug, menu_id):
+    on_area = slug.startswith("service-areas/")
+    return dropdown_menu(slug, "Service Areas", AREA_LINKS, menu_id, on_area)
+
+
 def nav(slug):
     p = prefix(slug)
-    links = [service_menu(slug, "services-menu")]
-    mobile = [service_menu(slug, "services-menu-mobile")]
+    links = [service_menu(slug, "services-menu"), area_menu(slug, "areas-menu")]
+    mobile = [service_menu(slug, "services-menu-mobile"), area_menu(slug, "areas-menu-mobile")]
     for label, target in NAV:
         links.append(
             f'<a href="{href(slug, target)}"{current(slug, target)}>{label}</a>'
@@ -258,7 +280,8 @@ def footer(slug):
         return "".join(
             f'<a href="{href(slug, t)}">{label}</a>' for label, t in items
         )
-    areas = ", ".join(AREAS[:-1]) + ", and " + AREAS[-1]
+    named = [city_anchor(slug, name) for name in AREAS]
+    areas = ", ".join(named[:-1]) + ", and " + named[-1]
     return f"""<footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__cols">
@@ -440,11 +463,86 @@ def project_tiles(slug):
     return '<div class="projects-grid reveal">' + "".join(html_bits) + "</div>"
 
 
-def areas_html():
+def city_anchor(slug, name):
+    """Link a published city name when that city has a page."""
+    target = AREA_TARGET.get(name)
+    if not target:
+        return name
+    here = ' aria-current="page"' if slug == target else ""
+    return f'<a class="city-link" href="{href(slug, target)}"{here}>{name}</a>'
+
+
+def areas_html(slug=""):
     def col(title, cities):
-        items = "".join(f"<li>{c}</li>" for c in cities)
+        items = "".join(f"<li>{city_anchor(slug, c)}</li>" for c in cities)
         return f"<div><h3>{title}</h3><ul class=\"areas-list\">{items}</ul></div>"
     return f'<div class="areas-grid reveal">{col("Primary", PRIMARY)}{col("Also served", SECONDARY)}</div>'
+
+
+# Longest names first. "Joshua Tree Rustic" is a finish style, not the city.
+_CITY_RE = re.compile(
+    r"\b(Indian Wells|Palm Springs|Palm Desert|Yucca Valley|Joshua Tree|La Quinta)\b(?! Rustic)"
+)
+_SKIP_CITY_LINK = {
+    "a", "h1", "h2", "h3", "h4", "h5", "h6",
+    "script", "style", "title", "textarea", "button", "option",
+}
+
+
+class _CityLinker(HTMLParser):
+    """Wrap published city names in body text. Skip headings, titles,
+    meta attributes, scripts, and text that is already inside a link."""
+
+    def __init__(self, slug):
+        super().__init__(convert_charrefs=False)
+        self.slug = slug
+        self.stack = []
+        self.out = []
+
+    def handle_starttag(self, tag, attrs):
+        self.stack.append(tag)
+        self.out.append(self.get_starttag_text())
+
+    def handle_endtag(self, tag):
+        if tag in self.stack:
+            while self.stack:
+                if self.stack.pop() == tag:
+                    break
+        self.out.append(f"</{tag}>")
+
+    def handle_startendtag(self, tag, attrs):
+        self.out.append(self.get_starttag_text())
+
+    def handle_data(self, data):
+        if any(tag in _SKIP_CITY_LINK for tag in self.stack):
+            self.out.append(data)
+        else:
+            self.out.append(_CITY_RE.sub(self._repl, data))
+
+    def handle_entityref(self, name):
+        self.out.append(f"&{name};")
+
+    def handle_charref(self, name):
+        self.out.append(f"&#{name};")
+
+    def handle_comment(self, data):
+        self.out.append(f"<!--{data}-->")
+
+    def handle_decl(self, decl):
+        self.out.append(f"<!{decl}>")
+
+    def _repl(self, match):
+        return city_anchor(self.slug, match.group(1))
+
+    def result(self):
+        return "".join(self.out)
+
+
+def link_cities(html, slug):
+    parser = _CityLinker(slug)
+    parser.feed(html)
+    parser.close()
+    return parser.result()
 
 
 def form_embed(form_id, title):
@@ -465,6 +563,7 @@ def gallery(slug, images, caption_prefix):
 
 
 def write_page(slug, html):
+    html = link_cities(html, slug)
     if slug:
         path = ROOT.joinpath(*[p for p in slug.split("/") if p], "index.html")
     else:

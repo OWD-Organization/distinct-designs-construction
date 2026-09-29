@@ -58,12 +58,12 @@
   }
 
   /* ---------------------------------------------------------------
-     Services dropdown
-     Desktop: hover and keyboard focus open it. Mobile: the button toggles
-     the three service links. Two menus exist (header links + hamburger);
-     each is bound on its own.
+     Header dropdowns (Services, Service Areas)
+     Desktop: hover and keyboard focus open the menu. Mobile: the button
+     toggles it. Each menu exists twice (header links + hamburger).
+     The 1280px cutoff matches the CSS that reveals the desktop link row.
      --------------------------------------------------------------- */
-  var servicesDesktop = window.matchMedia("(min-width: 1120px)");
+  var servicesDesktop = window.matchMedia("(min-width: 1280px)");
 
   document.querySelectorAll(".nav-dropdown").forEach(function (root) {
     var button = root.querySelector(".nav-dropdown__toggle");

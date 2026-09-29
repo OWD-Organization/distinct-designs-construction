@@ -73,6 +73,20 @@ TODO: confirm LeadConnector accepts submissions from the new domain.
 - **Price bands differ by source.** Guide pages say project levels from $250K to $4.5M+. Custom-home landing copy says ground-up homes from $870K to $5M+. Both are kept on the pages they came from.
 - **Coachella** (the city) is listed on the landing pages and was added to the combined service-area list. The current site footer did not name it separately from "Coachella Valley".
 - **Phone punctuation.** The current footer link text is missing a closing parenthesis: `(760 221-4290`. The contact page shows `(760) 221-4290`. This site uses the contact-page formatting.
+- **Service area pages do not invent local facts.** Yucca Valley, Joshua Tree, Palm Springs, Palm Desert, La Quinta, and Indian Wells each have a page under `/service-areas/`. There is still no sitemap (the site is noindex). These six URLs are the internal list, and the same six are linked from the header, the footer service-area sentence, and the areas lists. Other published cities (Twentynine Palms, Pioneer Town, Landers, Morongo Valley, Desert Hot Springs, Cathedral City, Rancho Mirage, Indio, Coachella) do not have pages. No city page states a project count, a street address, or a license number. Joshua Tree only has the published locality "Joshua Tree, CA" and Benoit R.'s review. Yucca Valley has Katie Lee's review and the Yelp listing title, which is not an office address. Palm Springs and Indian Wells are named on the services page as places where luxury custom homes are built. Palm Desert and La Quinta are on the service-area list and the homepage FAQ, and on the planning guide pages. They are not in that services-page sentence. No city-specific photo is published. HTML comments on each city page repeat these limits.
+
+## Service area pages
+
+| City | URL |
+|---|---|
+| Yucca Valley | `/service-areas/yucca-valley/` |
+| Joshua Tree | `/service-areas/joshua-tree/` |
+| Palm Springs | `/service-areas/palm-springs/` |
+| Palm Desert | `/service-areas/palm-desert/` |
+| La Quinta | `/service-areas/la-quinta/` |
+| Indian Wells | `/service-areas/indian-wells/` |
+
+There is no service-area overview page. The header item "Service Areas" opens these six links. It is not a link to a hub.
 
 ## Photography
 

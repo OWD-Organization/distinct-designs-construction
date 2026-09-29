@@ -41,6 +41,7 @@ def build_all():
     partners()
     referral()
     guides()
+    service_areas()
     missing()
 
 
@@ -125,7 +126,7 @@ def home():
 <section class="section section--tinted" id="areas-served">
   <h2>Areas we serve</h2>
   <p class="page-intro">Joshua Tree, CA, and the High Desert and Coachella Valley.</p>
-  {A()}
+  {A(slug)}
 </section>
 <section class="lead-section" id="form">
   <div class="lead-section__media">
@@ -377,7 +378,7 @@ def service_build():
 <section class="section" id="areas-served">
   <h2>Where we build custom homes</h2>
   <p class="page-intro">Joshua Tree, Yucca Valley, Palm Springs, Palm Desert, and the rest of the High Desert and Coachella Valley.</p>
-  {A()}
+  {A(slug)}
   {R(slug, [("Whole-home remodels", "services/whole-home-remodel"), ("Custom ADUs", "services/custom-adu"), ("All services", "services"), ("Contact", "contact")])}
 </section>
 <section class="lead-section" id="form">
@@ -457,7 +458,7 @@ def service_remodel():
 </section>
 <section class="section section--tinted" id="areas-served">
   <h2>Remodeling across the High Desert and Coachella Valley</h2>
-  {A()}
+  {A(slug)}
   {R(slug, [("Custom homes", "services/custom-home-build"), ("Custom ADUs", "services/custom-adu"), ("All services", "services"), ("Contact", "contact")])}
 </section>
 <section class="lead-section" id="form">
@@ -530,7 +531,7 @@ def service_adu():
 </section>
 <section class="section" id="areas-served">
   <h2>ADUs across Joshua Tree, Palm Springs, and the valley</h2>
-  {A()}
+  {A(slug)}
   {R(slug, [("Custom homes", "services/custom-home-build"), ("Whole-home remodels", "services/whole-home-remodel"), ("All services", "services"), ("Contact", "contact")])}
 </section>
 <section class="lead-section" id="form">
@@ -1142,6 +1143,171 @@ def guides():
 </section>
 """
         W(slug, S(slug, title, meta, body))
+
+
+def service_areas():
+    """One page per published primary city that Orion asked for.
+
+    Copy uses only facts already on the site: the service area list, the
+    homepage FAQ, the services-page sentence that names some of these cities,
+    the Joshua Tree locality, the Yucca Valley Yelp title, and two reviews
+    that name a city. Unknown local details stay in HTML comments and README.
+    """
+    shared_services = (
+        ("Custom Home Build", "services/custom-home-build",
+         "Ground-up custom homes from $870K to $5M+. One dedicated crew from groundbreaking to move-in, and a budget matched before you sign."),
+        ("Whole House Remodel", "services/whole-home-remodel",
+         "Designer kitchens, spa bathrooms, and full-home transformations, priced as one number before demo day."),
+        ("Custom ADU and Guest Suite", "services/custom-adu",
+         "Guest suites built to the same standard as our luxury homes, with permitting handled."),
+    )
+    pages = [
+        {
+            "slug": "service-areas/joshua-tree",
+            "name": "Joshua Tree",
+            "title": "Custom Homes, Remodels, and ADUs in Joshua Tree, CA | Distinct Designs",
+            "meta": "Distinct Designs Construction serves Joshua Tree, CA with custom home builds, whole-home remodels, and custom ADUs and guest suites. Call (760) 221-4290.",
+            "image": "images/site/Custom-Desert-Home.webp",
+            "alt": "Photograph of the Cubero custom home by Distinct Designs Construction",
+            "width": 1536,
+            "height": 1024,
+            "extra": """
+<!-- TODO: No street address or ZIP is published. No count of Joshua Tree projects is published. Benoit R.'s review names a remodel in Joshua Tree and does not name a street or a project. Do not add a license number here; the site publishes both #1039394 and #1145786. The hero photo is the Cubero custom home, labeled High Desert, not a Joshua Tree address. -->
+<p>Joshua Tree is where Distinct Designs Construction publishes its location: Joshua Tree, CA. No street address is published. Joshua Tree is on the company's service area list, and the services page names it as a place where Distinct Designs builds luxury custom homes. The homepage FAQ names it among the places the company serves.</p>
+<p>A published client review from Benoit R. describes a complete remodel in Joshua Tree.</p>
+""" + Q([("A complete remodel in Joshua Tree. Professional, detail-oriented, delivered on time and on budget.", "Benoit R. · Joshua Tree")]),
+        },
+        {
+            "slug": "service-areas/yucca-valley",
+            "name": "Yucca Valley",
+            "title": "Custom Homes, Remodels, and ADUs in Yucca Valley, CA | Distinct Designs",
+            "meta": "Distinct Designs Construction serves Yucca Valley with custom home builds, whole-home remodels, and custom ADUs and guest suites. Joshua Tree, CA. Call (760) 221-4290.",
+            "image": "images/hero-remodel.webp",
+            "alt": "Finished open-plan living room and kitchen with a stone feature wall, oak floors and sliding doors onto the desert",
+            "width": 1920,
+            "height": 960,
+            "extra": """
+<!-- TODO: No street address in Yucca Valley is published. No project count is published. The Yelp listing title is not an office address. The company location on this site is Joshua Tree, CA. Katie Lee's review names Yucca Valley/Landers and does not name a street. Do not add a license number here. The hero photo is not labeled as a Yucca Valley project. -->
+<p>Yucca Valley is on Distinct Designs Construction's published service area list. The services page names Yucca Valley as a place where Distinct Designs builds luxury custom homes. The homepage FAQ names it among the places the company serves. The company publishes its location as Joshua Tree, CA.</p>
+<p>The published Yelp listing is titled Distinct Designs, Yucca Valley. <a href="https://www.yelp.com/biz/distinct-designs-yucca-valley-6">View the Yelp listing</a>.</p>
+<p>A published client review from Katie Lee names work in Yucca Valley and Landers.</p>
+""" + Q([("Nick and his crew were by far the best contractors I have worked with out here in Yucca Valley/Landers.", "Katie Lee")]),
+        },
+        {
+            "slug": "service-areas/palm-springs",
+            "name": "Palm Springs",
+            "title": "Custom Homes, Remodels, and ADUs in Palm Springs, CA | Distinct Designs",
+            "meta": "Distinct Designs Construction serves Palm Springs with custom home builds, whole-home remodels, and custom ADUs and guest suites. Joshua Tree, CA. Call (760) 221-4290.",
+            "image": "images/hero-remodel.webp",
+            "alt": "Finished open-plan living room and kitchen with a stone feature wall, oak floors and sliding doors onto the desert",
+            "width": 1920,
+            "height": 960,
+            "extra": """
+<!-- TODO: No Palm Springs project, project count, street address, or testimonial is published. Do not invent them. Do not add a license number here. The hero photo is not labeled as a Palm Springs project. -->
+<p>Palm Springs is on Distinct Designs Construction's published service area list. The services page names Palm Springs as a place where Distinct Designs builds luxury custom homes. The homepage FAQ names it among the places the company serves. The company publishes its location as Joshua Tree, CA.</p>
+""",
+        },
+        {
+            "slug": "service-areas/palm-desert",
+            "name": "Palm Desert",
+            "title": "Custom Homes, Remodels, and ADUs in Palm Desert, CA | Distinct Designs",
+            "meta": "Distinct Designs Construction serves Palm Desert with custom home builds, whole-home remodels, and custom ADUs and guest suites. Joshua Tree, CA. Call (760) 221-4290.",
+            "image": "images/process-break-patio.webp",
+            "alt": "Desert backyard patio at sunset with a hot tub, string lights, lounge seating and a Joshua Tree, CA sign",
+            "width": 1920,
+            "height": 1440,
+            "extra": """
+<!-- TODO: No Palm Desert project, project count, street address, or testimonial is published. Palm Desert is on the service area list and in the homepage FAQ. It is not in the services-page sentence that names cities where luxury custom homes are built. Do not promote it into that sentence. Do not add a license number here. The hero photo is not labeled as a Palm Desert project. The Joshua Tree sign in the photo is a sign, not a Palm Desert address. -->
+<p>Palm Desert is on Distinct Designs Construction's published service area list. The homepage FAQ names Palm Desert among the places the company serves in the High Desert and Coachella Valley. The planning guide pages also name Palm Desert alongside Yucca Valley, Joshua Tree, Palm Springs, Rancho Mirage, and La Quinta. The company publishes its location as Joshua Tree, CA.</p>
+""",
+        },
+        {
+            "slug": "service-areas/la-quinta",
+            "name": "La Quinta",
+            "title": "Custom Homes, Remodels, and ADUs in La Quinta, CA | Distinct Designs",
+            "meta": "Distinct Designs Construction serves La Quinta with custom home builds, whole-home remodels, and custom ADUs and guest suites. Joshua Tree, CA. Call (760) 221-4290.",
+            "image": "images/process-break-terrace.webp",
+            "alt": "Desert terrace at dusk with a fire bowl, string lights and a spa, valley lights beyond",
+            "width": 1920,
+            "height": 1081,
+            "extra": """
+<!-- TODO: No La Quinta project, project count, street address, or testimonial is published. La Quinta is on the service area list, in the homepage FAQ, and on the planning guide pages. It is not in the services-page sentence that names cities where luxury custom homes are built. Do not add a license number here. The hero photo is not labeled as a La Quinta project. -->
+<p>La Quinta is on Distinct Designs Construction's published service area list. The homepage FAQ names La Quinta among the places the company serves. The planning guide pages also name La Quinta alongside Yucca Valley, Joshua Tree, Palm Springs, Palm Desert, and Rancho Mirage. The company publishes its location as Joshua Tree, CA.</p>
+""",
+        },
+        {
+            "slug": "service-areas/indian-wells",
+            "name": "Indian Wells",
+            "title": "Custom Homes, Remodels, and ADUs in Indian Wells, CA | Distinct Designs",
+            "meta": "Distinct Designs Construction serves Indian Wells with custom home builds, whole-home remodels, and custom ADUs and guest suites. Joshua Tree, CA. Call (760) 221-4290.",
+            "image": "images/site/Custom-Desert-Home.webp",
+            "alt": "Photograph of the Cubero custom home by Distinct Designs Construction",
+            "width": 1536,
+            "height": 1024,
+            "extra": """
+<!-- TODO: No Indian Wells project, project count, street address, or testimonial is published. Do not invent them. Do not add a license number here. The hero photo is the Cubero custom home, labeled High Desert, not an Indian Wells address. -->
+<p>Indian Wells is on Distinct Designs Construction's published service area list. The services page names Indian Wells as a place where Distinct Designs builds luxury custom homes. The homepage FAQ names it among the places the company serves. The company publishes its location as Joshua Tree, CA.</p>
+""",
+        },
+    ]
+    for page in pages:
+        slug = page["slug"]
+        p = g.prefix(slug)
+        name = page["name"]
+        cards = []
+        for label, target, text in shared_services:
+            cards.append(f"""<a class="service-card" href="{HREF(slug, target)}">
+      <h3>{label}</h3>
+      <p>{text}</p>
+      <span class="service-card__more">Service page</span>
+    </a>""")
+        body = f"""
+<header class="hero hero--page hero--area">
+  <img class="hero__image" src="{p}{page["image"]}" alt="{page["alt"]}" width="{page["width"]}" height="{page["height"]}" fetchpriority="high">
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__content reveal">
+    <p class="eyebrow">Service area</p>
+    <h1>{name} custom homes, remodels, and ADUs</h1>
+    <p class="subhead">Distinct Designs Construction serves {name} with custom home builds, whole-home remodels, and custom ADUs and guest suites.</p>
+  </div>
+</header>
+<section class="section">
+  <h2>Work in {name}</h2>
+  <div class="prose">
+    {page["extra"]}
+    <p>Call <a href="tel:{TEL}">{PHONE}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>. Licensed, bonded, and insured.</p>
+  </div>
+</section>
+<section class="section section--tinted" id="services">
+  <div class="section__header">
+    <h2>Three services in {name}</h2>
+    <p>The same three services Distinct Designs publishes, offered in {name} because {name} is on the service area list.</p>
+  </div>
+  <div class="service-grid">
+    {"".join(cards)}
+  </div>
+  <p class="page-intro" style="margin-top:1.5rem"><a href="{HREF(slug, "services/custom-home-build")}">Custom Home Build</a>, <a href="{HREF(slug, "services/whole-home-remodel")}">Whole House Remodel</a>, and <a href="{HREF(slug, "services/custom-adu")}">Custom ADU and Guest Suite</a>.</p>
+</section>
+<section class="section" id="why-us">
+  <h2>How the work is done</h2>
+  <p class="page-intro">These are the standards published for Distinct Designs projects.</p>
+  {WHY(g.WHY_BUILD)}
+</section>
+<section class="section section--tinted" id="areas-served">
+  <h2>The published service area</h2>
+  <p class="page-intro">{name} sits on this list with the rest of the High Desert and Coachella Valley.</p>
+  {A(slug)}
+</section>
+<section class="lead-section" id="form">
+  <div class="lead-section__media"><img src="{p}images/footer-cta.webp" alt="Finished great room with wood floors and desert-view windows" width="1600" height="1200" loading="lazy"></div>
+  <div class="lead-section__content">
+    <h2>Talk about a project in {name}</h2>
+    <p>Call <a href="tel:{TEL}">{PHONE}</a>, or go to the contact page and send a note.</p>
+    <a class="btn btn--primary" href="{HREF(slug, "contact")}">Contact Distinct Designs</a>
+  </div>
+</section>
+"""
+        W(slug, S(slug, page["title"], page["meta"], body))
 
 
 def missing():
