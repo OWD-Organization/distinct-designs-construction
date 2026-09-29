@@ -1,0 +1,5 @@
+# Staging site. Do not crawl.
+# Remove this disallow (and the noindex tags) only when the client's
+# domain is ready to launch. See README.md, "Removing noindex at launch".
+User-agent: *
+Disallow: /
