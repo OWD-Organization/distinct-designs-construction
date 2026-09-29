@@ -551,8 +551,23 @@ def link_cities(html, slug):
 
 
 def form_embed(form_id, title):
-    return f"""<div class="form-embed">
-  <iframe src="https://api.leadconnectorhq.com/widget/form/{form_id}" title="{title}" id="inline-{form_id}"></iframe>
+    """Standard GoHighLevel inline embed. form_embed.js resizes the iframe.
+
+    data-height is only the fallback if that script cannot resize. The contact
+    form is the tall one (fields through Submit). Guide forms are name and email.
+    """
+    # Pixel fallbacks measured from the live widgets (desktop and 390px),
+    # rounded up so Submit stays in view if form_embed.js cannot resize.
+    if form_id == CONTACT_FORM:
+        kind, fallback = "contact", "1280"
+    elif form_id == REFERRAL_FORM:
+        kind, fallback = "referral", "2400"
+    else:
+        kind, fallback = "guide", "512"
+    # data-layout uses single quotes, matching GoHighLevel's snippet.
+    layout = "{'id':'INLINE'}"
+    return f"""<div class="form-embed form-embed--{kind}">
+  <iframe src="https://api.leadconnectorhq.com/widget/form/{form_id}" title="{title}" id="inline-{form_id}" data-layout="{layout}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="{title}" data-height="{fallback}" data-layout-iframe-id="inline-{form_id}" data-form-id="{form_id}" scrolling="no"></iframe>
 </div>"""
 
 
@@ -579,7 +594,14 @@ def write_page(slug, html):
 
 
 def page_shell(slug, title, description, body, extra_ld=""):
-    return head(slug, title, description, extra_ld) + nav(slug) + '<main id="main">' + body + "</main>" + footer(slug)
+    html = head(slug, title, description, extra_ld) + nav(slug) + '<main id="main">' + body + "</main>" + footer(slug)
+    if "api.leadconnectorhq.com/widget/form/" in html:
+        html = html.replace(
+            "</body>",
+            '<script src="https://link.msgsndr.com/js/form_embed.js"></script>\n</body>',
+            1,
+        )
+    return html
 
 
 def why_cards(items):

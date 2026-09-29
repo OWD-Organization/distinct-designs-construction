@@ -1132,7 +1132,7 @@ def guides():
   <h1>{h1}</h1>
   <p class="page-intro">{sub}</p>
   <ul class="check-list" style="margin-top:1.25rem">{bl}</ul>
-  <div class="two-col" style="margin-top:2rem">
+  <div class="two-col guide-split" style="margin-top:2rem">
     <div>
       <p><strong>Free · instant download</strong></p>
       <img src="{p}images/site/Distinct-Design-Planning-Guide-2.png" alt="Distinct Designs planning guide cover" width="600" height="780" loading="lazy">

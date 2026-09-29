@@ -1321,15 +1321,29 @@ a.city-link {
 
 .project-tile--link { cursor: pointer; }
 
+/* GoHighLevel sets an inline pixel height via form_embed.js. The custom
+   property is the fallback when that script cannot resize: tall enough to
+   show Submit, and replaced once the script writes its own height.
+   min-height only stops the 150px browser default during the first paint. */
 .form-embed iframe {
+  display: block;
   width: 100%;
-  min-height: 640px;
-  height: 780px;
+  height: var(--form-fallback, 36rem);
+  min-height: 16rem;
   border: 0;
+  overflow: hidden;
   background: #fff;
   border-radius: var(--radius);
 }
+.form-embed--guide { --form-fallback: 32rem; }
+.form-embed--contact { --form-fallback: 80rem; }
+.form-embed--referral { --form-fallback: 150rem; }
 .lead-section .form-embed iframe { background: transparent; }
+
+/* Guide headline and the short form share one row, top-aligned, so the
+   form card is only as tall as the fields. */
+#guide .two-col,
+.guide-split { align-items: start; }
 
 .site-footer__cols {
   display: grid;
