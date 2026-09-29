@@ -58,6 +58,55 @@
   }
 
   /* ---------------------------------------------------------------
+     Services dropdown
+     Desktop: hover and keyboard focus open it. Mobile: the button toggles
+     the three service links. Two menus exist (header links + hamburger);
+     each is bound on its own.
+     --------------------------------------------------------------- */
+  var servicesDesktop = window.matchMedia("(min-width: 1120px)");
+
+  document.querySelectorAll(".nav-dropdown").forEach(function (root) {
+    var button = root.querySelector(".nav-dropdown__toggle");
+    var panel = root.querySelector(".nav-dropdown__panel");
+    if (!button || !panel) return;
+
+    function openMenu() {
+      button.setAttribute("aria-expanded", "true");
+      root.classList.add("is-open");
+    }
+
+    function closeMenu() {
+      button.setAttribute("aria-expanded", "false");
+      root.classList.remove("is-open");
+    }
+
+    root.addEventListener("mouseenter", function () {
+      if (servicesDesktop.matches) openMenu();
+    });
+    root.addEventListener("mouseleave", function () {
+      if (servicesDesktop.matches) closeMenu();
+    });
+    root.addEventListener("focusin", function () {
+      if (servicesDesktop.matches) openMenu();
+    });
+    root.addEventListener("focusout", function (event) {
+      if (!servicesDesktop.matches) return;
+      if (!root.contains(event.relatedTarget)) closeMenu();
+    });
+    button.addEventListener("click", function () {
+      if (servicesDesktop.matches) return;
+      if (button.getAttribute("aria-expanded") === "true") closeMenu();
+      else openMenu();
+    });
+    root.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeMenu();
+        button.focus();
+      }
+    });
+  });
+
+  /* ---------------------------------------------------------------
      Scroll-triggered reveal animations
      --------------------------------------------------------------- */
   var revealEls = document.querySelectorAll(".reveal");

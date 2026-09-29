@@ -61,10 +61,14 @@ CONTACT_FORM = "IbFWLZlZNETBrImKFVjN"
 REFERRAL_FORM = "MyS2TrJSOhTn1mitpihf"
 
 NAV = [
-    ("Services", "services"),
     ("Projects", "projects"),
     ("About", "about"),
     ("Contact", "contact"),
+]
+SERVICE_LINKS = [
+    ("Custom Home Build", "services/custom-home-build"),
+    ("Whole House Remodel", "services/whole-home-remodel"),
+    ("Custom ADU and Guest Suite", "services/custom-adu"),
 ]
 MOBILE_EXTRA = [
     ("Remodels", "remodels"),
@@ -168,10 +172,26 @@ def current(slug, target):
     return ""
 
 
+def service_menu(slug, menu_id):
+    on_services = slug == "services" or slug.startswith("services/")
+    current_attr = ' aria-current="true"' if on_services else ""
+    items = []
+    for label, target in SERVICE_LINKS:
+        items.append(
+            f'<a role="menuitem" href="{href(slug, target)}"{current(slug, target)}>{label}</a>'
+        )
+    return f"""<div class="nav-dropdown">
+      <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="{menu_id}"{current_attr}>Services</button>
+      <div class="nav-dropdown__panel" id="{menu_id}" role="menu" aria-label="Services">
+        {"".join(items)}
+      </div>
+    </div>"""
+
+
 def nav(slug):
     p = prefix(slug)
-    links = []
-    mobile = []
+    links = [service_menu(slug, "services-menu")]
+    mobile = [service_menu(slug, "services-menu-mobile")]
     for label, target in NAV:
         links.append(
             f'<a href="{href(slug, target)}"{current(slug, target)}>{label}</a>'
