@@ -30,6 +30,7 @@ def build_all():
     service_build()
     service_remodel()
     service_adu()
+    service_partial_remodels()
     projects()
     project_pages()
     contact()
@@ -79,7 +80,7 @@ def home():
       <span class="service-card__more">View ADUs</span>
     </a>
   </div>
-  <p class="page-intro" style="margin-top:1.5rem">Also: designer kitchens and bathrooms, and full-service architecture and engineering coordination. <a href="{HREF(slug, "services")}">See every service</a>.</p>
+  <p class="page-intro" style="margin-top:1.5rem">Also: <a href="{HREF(slug, "services/remodels")}">designer kitchens and bathrooms</a>, and full-service architecture and engineering coordination. <a href="{HREF(slug, "services")}">See every service</a>.</p>
 </section>
 <section class="section section--tinted" id="guide">
   <div class="two-col">
@@ -239,6 +240,7 @@ def services():
     <a class="service-card" href="{HREF(slug, "services/custom-home-build")}"><h3>Custom home build</h3><p>Ground-up luxury homes in Joshua Tree, Palm Springs, and the High Desert.</p><span class="service-card__more">Service page</span></a>
     <a class="service-card" href="{HREF(slug, "services/whole-home-remodel")}"><h3>Whole-home remodel</h3><p>Kitchens, bathrooms, and full-home transformations.</p><span class="service-card__more">Service page</span></a>
     <a class="service-card" href="{HREF(slug, "services/custom-adu")}"><h3>Custom ADU and guest suite</h3><p>Built to the same standard as our $870K+ homes.</p><span class="service-card__more">Service page</span></a>
+    <a class="service-card" href="{HREF(slug, "services/remodels")}"><h3>Remodels</h3><p>Designer kitchen renovations and remodels, and luxury bathroom renovations, remodels and additions.</p><span class="service-card__more">Service page</span></a>
   </div>
 </section>
 <section class="section section--tinted">
@@ -306,6 +308,12 @@ def services():
   <h2>Custom ADU and guest suite construction</h2>
   <p class="page-intro">Custom ADU construction is part of what Distinct Designs builds across the High Desert, to the same standard as our luxury homes. Architecture and engineering coordination is included on design-build projects.</p>
   {R(slug, [("Custom ADU page", "services/custom-adu"), ("Custom homes", "services/custom-home-build"), ("Whole-home remodels", "services/whole-home-remodel"), ("Contact", "contact")])}
+</section>
+<section class="section" id="remodels">
+  <p class="eyebrow">Remodels</p>
+  <h2>Kitchens, bathrooms, and additions</h2>
+  <p class="page-intro">Designer kitchen renovations and remodels, and luxury bathroom renovations, remodels and additions. This is the smaller scope. A whole-home remodel is its own service.</p>
+  <p><a href="{HREF(slug, "services/remodels")}">Read the remodels page</a></p>
 </section>
 <section class="lead-section">
   <div class="lead-section__media"><img src="{p}images/process-break-terrace.webp" alt="Desert terrace at dusk with a fire bowl, string lights and a spa" width="1920" height="1081" loading="lazy"></div>
@@ -438,7 +446,7 @@ def service_remodel():
     <article class="info-card"><h3>Kitchens</h3><ul class="check-list"><li>Luxury kitchen redesigns and custom layouts</li><li>Custom cabinetry and built-in storage</li><li>Designer backsplashes and feature tile</li></ul></article>
     <article class="info-card"><h3>Bathrooms</h3><ul class="check-list"><li>Spa-style bathrooms and steam rooms</li><li>Designer shower systems and soaking tubs</li><li>Custom vanities and bespoke storage</li></ul></article>
   </div>
-  <p style="margin-top:1.25rem"><a href="{HREF(slug, "services")}#remodeling">See the full remodel scope</a> or the <a href="{HREF(slug, "remodels")}">remodels overview</a>.</p>
+  <p style="margin-top:1.25rem"><a href="{HREF(slug, "services")}#remodeling">See the full remodel scope</a> or <a href="{HREF(slug, "services/remodels")}">kitchen, bathroom, and addition remodels</a>.</p>
 </section>
 <section class="section section--tinted" id="projects">
   <div class="section__header"><h2>Signature remodels we've delivered</h2></div>
@@ -906,6 +914,53 @@ def thanks():
               body))
 
 
+def service_partial_remodels():
+    """Modest kitchens, bathrooms, and additions page.
+
+    Source: the homepage FAQ lists Designer Kitchen Renovations and Remodels
+    and Luxury Bathroom Renovations, Remodels and Additions as their own
+    items, next to whole-home renovations. Kitchen and bath bullets are the
+    ones already published on the services page. /remodels/ stays the
+    best-general-contractor page and is not this service.
+    """
+    slug = "services/remodels"
+    p = g.prefix(slug)
+    body = f"""
+<header class="hero hero--page">
+  <img class="hero__image" src="{p}images/process-break-bath.webp" alt="Spa-level bathroom remodel with a freestanding soaking tub, subway tile, penny-round floor and desert views" width="1920" height="960" fetchpriority="high">
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__content reveal">
+    <p class="eyebrow">Remodels</p>
+    <h1>Kitchen, bathroom, and addition remodels</h1>
+    <p class="subhead">Designer kitchen renovations and remodels, and luxury bathroom renovations, remodels and additions. A whole-home remodel is a separate service.</p>
+  </div>
+</header>
+<section class="section">
+  <!-- TODO: No project count, price, timeline, or testimonial is published for a kitchen, bathroom, or addition on its own. Additions are named in the homepage FAQ and are not described further. Do not attach whole-home reviews or case studies here. Do not add a license number; the site publishes both #1039394 and #1145786. The photo is an existing bathroom image and is not labeled as a partial-remodel project. -->
+  <h2>A smaller scope than a whole-home remodel</h2>
+  <div class="prose">
+    <p>The homepage FAQ lists these on their own, next to whole-home renovations: Designer Kitchen Renovations and Remodels, and Luxury Bathroom Renovations, Remodels and Additions.</p>
+    <p>The services page describes remodeling as a complete structural transformation or a targeted renovation of the spaces that matter most. A whole-home remodel prices the kitchen, the baths, and the rest of the house as one project. <a href="{HREF(slug, "services/whole-home-remodel")}">That service is Whole House Remodel</a>.</p>
+    <p>We specialize in custom luxury kitchen and bathroom remodels, custom tile and stone, backsplashes, showers, mosaics, and floors.</p>
+  </div>
+  <div class="two-col" style="margin-top:1.5rem">
+    <article class="info-card"><h3>Kitchens</h3><ul class="check-list"><li>Luxury kitchen redesigns and custom layouts</li><li>Custom cabinetry and built-in storage</li><li>Designer backsplashes and feature tile</li></ul></article>
+    <article class="info-card"><h3>Bathrooms</h3><ul class="check-list"><li>Spa-style bathrooms and steam rooms</li><li>Designer shower systems and soaking tubs</li><li>Custom vanities and bespoke storage</li></ul></article>
+  </div>
+  <p class="page-intro" style="margin-top:1.5rem">Additions are named in that same FAQ line, with the bathroom renovations and remodels. No separate scope for an addition is published.</p>
+  <div class="link-row">
+    <a class="btn btn--nav" href="{HREF(slug, "services/whole-home-remodel")}">Whole House Remodel</a>
+    <a class="btn btn--primary" href="{HREF(slug, "contact")}">Contact</a>
+  </div>
+  <p style="margin-top:1.25rem">Call <a href="tel:{TEL}">{PHONE}</a>.</p>
+</section>
+"""
+    W(slug, S(slug,
+              "Kitchen, Bathroom, and Addition Remodels | Distinct Designs",
+              "Designer kitchen renovations and remodels, and luxury bathroom renovations, remodels and additions, from Distinct Designs Construction. Whole-home remodels are a separate service.",
+              body))
+
+
 def remodels():
     slug = "remodels"
     p = g.prefix(slug)
@@ -1160,6 +1215,8 @@ def service_areas():
          "Designer kitchens, spa bathrooms, and full-home transformations, priced as one number before demo day."),
         ("Custom ADU and Guest Suite", "services/custom-adu",
          "Guest suites built to the same standard as our luxury homes, with permitting handled."),
+        ("Remodels", "services/remodels",
+         "Designer kitchen renovations and remodels, and luxury bathroom renovations, remodels and additions."),
     )
     pages = [
         {
@@ -1280,13 +1337,13 @@ def service_areas():
 </section>
 <section class="section section--tinted" id="services">
   <div class="section__header">
-    <h2>Three services in {name}</h2>
-    <p>The same three services Distinct Designs publishes, offered in {name} because {name} is on the service area list.</p>
+    <h2>Services in {name}</h2>
+    <p>The services Distinct Designs publishes, offered in {name} because {name} is on the service area list. Remodels is the smaller scope: kitchens, bathrooms, and additions.</p>
   </div>
   <div class="service-grid">
     {"".join(cards)}
   </div>
-  <p class="page-intro" style="margin-top:1.5rem"><a href="{HREF(slug, "services/custom-home-build")}">Custom Home Build</a>, <a href="{HREF(slug, "services/whole-home-remodel")}">Whole House Remodel</a>, and <a href="{HREF(slug, "services/custom-adu")}">Custom ADU and Guest Suite</a>.</p>
+  <p class="page-intro" style="margin-top:1.5rem"><a href="{HREF(slug, "services/custom-home-build")}">Custom Home Build</a>, <a href="{HREF(slug, "services/whole-home-remodel")}">Whole House Remodel</a>, <a href="{HREF(slug, "services/custom-adu")}">Custom ADU and Guest Suite</a>, and <a href="{HREF(slug, "services/remodels")}">Remodels</a>.</p>
 </section>
 <section class="section" id="why-us">
   <h2>How the work is done</h2>

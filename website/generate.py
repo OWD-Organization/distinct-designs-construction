@@ -71,6 +71,7 @@ SERVICE_LINKS = [
     ("Custom Home Build", "services/custom-home-build"),
     ("Whole House Remodel", "services/whole-home-remodel"),
     ("Custom ADU and Guest Suite", "services/custom-adu"),
+    ("Remodels", "services/remodels"),
 ]
 # These six already appear on the published service-area list. Each has a page.
 # Other cities in AREAS stay as text until a page exists for them.
@@ -83,8 +84,11 @@ AREA_LINKS = [
     ("Indian Wells", "service-areas/indian-wells"),
 ]
 AREA_TARGET = dict(AREA_LINKS)
+# /remodels/ is the preserved best-general-contractor page, not the
+# kitchens/baths/additions service. Keep it reachable without reusing
+# the Services label "Remodels".
 MOBILE_EXTRA = [
-    ("Remodels", "remodels"),
+    ("Best general contractor", "remodels"),
     ("Planning Guide", "planning-guide"),
     ("Partners", "partners"),
 ]
@@ -265,11 +269,12 @@ def footer(slug):
         ("Whole-home remodel", "services/whole-home-remodel"),
         ("Custom ADU", "services/custom-adu"),
         ("All services", "services"),
-        ("Remodels", "remodels"),
+        ("Remodels", "services/remodels"),
     ]
     cols_company = [
         ("About", "about"),
         ("Projects", "projects"),
+        ("Best general contractor", "remodels"),
         ("Contact", "contact"),
         ("Planning guide", "planning-guide"),
         ("Partners", "partners"),
